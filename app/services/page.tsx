@@ -318,9 +318,9 @@ export default function PremiumTreatmentsPage() {
       name: "Isabella Martinez",
       treatment: "HydraFacial Deluxe",
       text: "My skin has never looked better! The immediate glow and long-term improvements are amazing. Worth every penny.",
-              rating: 5,
-        image: "",
-        location: "Malibu"
+      rating: 5,
+      image: "",
+      location: "Malibu"
     }
   ]
 

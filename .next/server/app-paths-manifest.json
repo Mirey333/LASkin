@@ -1,7 +1,17 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/booking/page": "app/booking/page.js",
+  "/analytics/page": "app/analytics/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/crm/page": "app/crm/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/marketing/page": "app/marketing/page.js",
+  "/customer-portal/page": "app/customer-portal/page.js",
+  "/page": "app/page.js",
+  "/photo-editor/page": "app/photo-editor/page.js",
+  "/reports/page": "app/reports/page.js",
+  "/reviews/page": "app/reviews/page.js",
   "/shop/page": "app/shop/page.js",
   "/services/page": "app/services/page.js",
-  "/customer-portal/page": "app/customer-portal/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/smart-booking/page": "app/smart-booking/page.js"
 }
