@@ -12,7 +12,7 @@ import {
   PlusIcon,
   PlayIcon,
   EyeIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon,
   AdjustmentsHorizontalIcon,
   LightBulbIcon,
   RocketLaunchIcon,
@@ -346,7 +346,7 @@ export default function AIMarketingHub() {
                       value={contentPrompt}
                       onChange={(e) => setContentPrompt(e.target.value)}
                       className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/80 backdrop-blur-sm"
-                      rows="4"
+                      rows={4}
                       placeholder="Beschreibe deinen gewünschten Content... z.B. 'Luxuriöse Botox-Behandlung mit eleganter Atmosphäre, zeige Vorher-Nachher Transformation'"
                     />
                   </div>
@@ -480,7 +480,7 @@ export default function AIMarketingHub() {
                         <span>Vorschau</span>
                       </button>
                       <button className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
-                        <DownloadIcon className="h-4 w-4" />
+                        <ArrowDownTrayIcon className="h-4 w-4" />
                         <span>Download</span>
                       </button>
                       <button className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all">
