@@ -1,8 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/booking/page": "app/booking/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/customer-portal/page": "app/customer-portal/page.js",
   "/shop/page": "app/shop/page.js",
-  "/services/page": "app/services/page.js"
+  "/services/page": "app/services/page.js",
+  "/customer-portal/page": "app/customer-portal/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }
