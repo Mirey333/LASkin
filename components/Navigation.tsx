@@ -43,16 +43,27 @@ export default function Navigation() {
 
   // Adjust main content margin when business menu opens/closes (desktop only)
   useEffect(() => {
-    const mainContent = document.getElementById('main-content')
-    if (mainContent && window.innerWidth >= 1024) { // Only on large screens
-      if (!businessCollapsed) {
-        mainContent.style.marginLeft = '288px'
-        mainContent.style.transition = 'margin-left 0.3s ease'
-      } else {
+    const updateLayout = () => {
+      const mainContent = document.getElementById('main-content')
+      if (mainContent && window.innerWidth >= 1024) { // Only on large screens
+        if (!businessCollapsed) {
+          mainContent.style.marginLeft = '288px'
+          mainContent.style.transition = 'margin-left 0.3s ease'
+        } else {
+          mainContent.style.marginLeft = '0px'
+          mainContent.style.transition = 'margin-left 0.3s ease'
+        }
+      } else if (mainContent) {
+        // On mobile, always reset margin
         mainContent.style.marginLeft = '0px'
-        mainContent.style.transition = 'margin-left 0.3s ease'
       }
     }
+
+    updateLayout()
+    
+    // Also listen for window resize
+    window.addEventListener('resize', updateLayout)
+    return () => window.removeEventListener('resize', updateLayout)
   }, [businessCollapsed])
 
   // Customer area (public)
@@ -222,6 +233,7 @@ export default function Navigation() {
                   <Link
                     key={item.name}
                     href={item.href}
+                    onClick={() => setBusinessCollapsed(true)}
                     className={`flex items-center space-x-3 p-3 rounded-lg transition-all group ${
                       isActive 
                         ? 'bg-red-600 text-white shadow-md' 
