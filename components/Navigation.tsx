@@ -41,6 +41,31 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
+  // Layout anpassung wenn Business-Menü geöffnet/geschlossen wird
+  useEffect(() => {
+    const mainContent = document.getElementById('main-content')
+    if (mainContent && window.innerWidth >= 1024) { // Nur auf Desktop
+      if (!businessCollapsed) {
+        mainContent.style.marginLeft = '288px'
+        mainContent.style.transition = 'margin-left 0.3s ease'
+      } else {
+        mainContent.style.marginLeft = '0px'
+        mainContent.style.transition = 'margin-left 0.3s ease'
+      }
+    }
+    
+    // Cleanup on resize
+    const handleResize = () => {
+      const mainContent = document.getElementById('main-content')
+      if (mainContent && window.innerWidth < 1024) {
+        mainContent.style.marginLeft = '0px'
+      }
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [businessCollapsed])
+
 
 
   // Customer area (public)
@@ -107,17 +132,6 @@ export default function Navigation() {
                 )
               })}
             </div>
-          </div>
-
-          {/* Business Menu Toggle */}
-          <div className="hidden lg:flex items-center mr-4">
-            <button
-              onClick={() => setBusinessCollapsed(!businessCollapsed)}
-              className="flex items-center space-x-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all text-sm font-medium"
-            >
-              <BuildingOfficeIcon className="h-4 w-4" />
-              <span>Business</span>
-            </button>
           </div>
 
           {/* Right Side - Chat, Store Locator, Social Links */}
@@ -245,6 +259,17 @@ export default function Navigation() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Business Menu Toggle Button - Floating */}
+      {businessCollapsed && (
+        <button
+          onClick={() => setBusinessCollapsed(false)}
+          className="fixed top-20 left-4 z-50 bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition-all hidden lg:block"
+          title="Open Business Menu"
+        >
+          <BuildingOfficeIcon className="h-5 w-5" />
+        </button>
       )}
 
       {/* Mobile Navigation */}
