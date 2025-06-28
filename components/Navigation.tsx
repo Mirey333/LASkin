@@ -37,17 +37,9 @@ import {
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-  const [businessCollapsed, setBusinessCollapsed] = useState(false)
+  const [businessCollapsed, setBusinessCollapsed] = useState(true)
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
-
-  // Set CSS variable for sidebar width
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--sidebar-width', 
-      businessCollapsed ? '64px' : '288px'
-    )
-  }, [businessCollapsed])
 
   // Customer area (public)
   const customerItems = [
@@ -189,65 +181,67 @@ export default function Navigation() {
       </div>
 
       {/* Business Sidebar - Left - Collapsible */}
-      <div className={`fixed top-16 left-0 bottom-0 ${businessCollapsed ? 'w-16' : 'w-72'} bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:block overflow-y-auto transition-all duration-300`}>
-        <div className="p-4">
+      {!businessCollapsed && (
+        <div className="fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:block overflow-y-auto">
+          <div className="p-4">
           
-          {/* Collapse Toggle Button */}
-          <div className="flex items-center justify-between mb-4">
-            {!businessCollapsed && (
+            {/* Header with Close Button */}
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-2 text-red-600 font-semibold text-xs">
                 <BuildingOfficeIcon className="h-4 w-4" />
                 <span>BUSINESS AREA</span>
               </div>
-            )}
-            <button
-              onClick={() => setBusinessCollapsed(!businessCollapsed)}
-              className={`p-2 bg-red-50 rounded-lg hover:bg-red-100 transition-all text-red-600 hover:text-red-800 ${businessCollapsed ? 'w-full flex justify-center' : ''}`}
-              title={businessCollapsed ? 'Expand Business Menu' : 'Collapse Business Menu'}
-            >
-              {businessCollapsed ? (
-                <ChevronRightIcon className="h-5 w-5" />
-              ) : (
-                <ChevronLeftIcon className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+              <button
+                onClick={() => setBusinessCollapsed(true)}
+                className="p-2 bg-red-50 rounded-lg hover:bg-red-100 transition-all text-red-600 hover:text-red-800"
+                title="Close Business Menu"
+              >
+                <XMarkIcon className="h-5 w-5" />
+              </button>
+            </div>
 
-          {/* Business Menu Items */}
-          <div className="space-y-1">
-            {businessItems.map((item) => {
-              const isActive = pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center ${businessCollapsed ? 'justify-center p-3' : 'space-x-3 p-3'} rounded-lg transition-all group ${
-                    isActive 
-                      ? 'bg-red-600 text-white shadow-md' 
-                      : 'text-gray-700 hover:bg-red-50 hover:text-red-700'
-                  }`}
-                  title={businessCollapsed ? item.name : ''}
-                >
-                  <item.icon className={`h-5 w-5 ${businessCollapsed ? 'mx-auto' : ''}`} />
-                  {!businessCollapsed && (
+            {/* Business Menu Items */}
+            <div className="space-y-1">
+              {businessItems.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all group ${
+                      isActive 
+                        ? 'bg-red-600 text-white shadow-md' 
+                        : 'text-gray-700 hover:bg-red-50 hover:text-red-700'
+                    }`}
+                  >
+                    <item.icon className="h-5 w-5" />
                     <span className="font-medium">{item.name}</span>
-                  )}
-                </Link>
-              )
-            })}
-          </div>
+                  </Link>
+                )
+              })}
+            </div>
 
-          {/* Status Info - Only show when expanded */}
-          {!businessCollapsed && (
+            {/* Status Info */}
             <div className="mt-auto pt-6 border-t border-gray-200">
               <div className="text-xs text-gray-500 text-center">
                 <div className="font-medium">Jenny's Xpandia Platform</div>
                 <div className="mt-1">Fully Implemented ✨</div>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Business Menu Toggle Button */}
+      {businessCollapsed && (
+        <button
+          onClick={() => setBusinessCollapsed(false)}
+          className="fixed top-20 left-4 z-50 bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition-all hidden lg:block"
+          title="Open Business Menu"
+        >
+          <BuildingOfficeIcon className="h-5 w-5" />
+        </button>
+      )}
 
       {/* Mobile Navigation */}
       {isOpen && (

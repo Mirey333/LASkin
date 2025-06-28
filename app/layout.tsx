@@ -33,8 +33,8 @@ export default function RootLayout({
           {/* Navigation */}
           <Navigation />
           
-          {/* Main Content - Dynamic margin */}
-          <div className="relative z-10 pt-16 lg:ml-[var(--sidebar-width,288px)] transition-all duration-300">
+          {/* Main Content */}
+          <div className="relative z-10 pt-16">
             {children}
           </div>
           
