@@ -35,7 +35,7 @@ export default function CRMSystem() {
   const [activeTemplate, setActiveTemplate] = useState<'sms' | 'email' | 'instagram' | 'facebook' | 'twitter'>('email')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50">
       <Navigation />
       
       <div className="pt-32 pb-20">
@@ -44,7 +44,7 @@ export default function CRMSystem() {
           {/* Header */}
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <UserGroupIcon className="h-8 w-8 text-black mr-3" />
+              <UserGroupIcon className="h-8 w-8 text-purple-600 mr-3" />
               <h1 className="text-4xl font-light text-gray-900">Customer Management</h1>
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -53,16 +53,16 @@ export default function CRMSystem() {
           </div>
 
           {/* PRIORITY MESSAGES CHATBOX - ALWAYS ON TOP */}
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 mb-8">
-            <div className="bg-black text-white p-4 rounded-t-xl">
+          <div className="bg-white rounded-xl shadow-lg border border-purple-200 mb-8">
+            <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
                   <h2 className="text-xl font-semibold">Priority Messages</h2>
-                  <span className="bg-white text-black px-2 py-1 rounded-full text-sm font-medium">LIVE</span>
+                  <span className="bg-white text-purple-600 px-2 py-1 rounded-full text-sm font-medium">LIVE</span>
                 </div>
                 <div className="text-sm">
-                  <span className="bg-gray-800 px-3 py-1 rounded-full">3 urgent • 15 normal</span>
+                  <span className="bg-purple-800 px-3 py-1 rounded-full">3 urgent • 15 normal</span>
                 </div>
               </div>
             </div>
@@ -116,17 +116,17 @@ export default function CRMSystem() {
                     key={msg.id}
                     className={`p-4 rounded-lg border-l-4 transition-all hover:shadow-md cursor-pointer ${
                       msg.priority === 'urgent' 
-                        ? 'border-l-black bg-gray-50 hover:bg-gray-100' 
-                        : 'border-l-gray-400 bg-white hover:bg-gray-50'
+                        ? 'border-l-rose-500 bg-rose-50 hover:bg-rose-100' 
+                        : 'border-l-purple-400 bg-purple-50 hover:bg-purple-100'
                     }`}
                   >
                     <div className="flex items-start space-x-3">
                       <div className={`relative flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium ${
-                        msg.priority === 'urgent' ? 'bg-black' : 'bg-gray-600'
+                        msg.priority === 'urgent' ? 'bg-gradient-to-r from-rose-500 to-pink-500' : 'bg-gradient-to-r from-purple-500 to-indigo-500'
                       }`}>
                         {msg.avatar}
                         {msg.unread && (
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-black rounded-full flex items-center justify-center">
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 rounded-full flex items-center justify-center">
                             <div className="w-2 h-2 bg-white rounded-full"></div>
                           </div>
                         )}
@@ -138,12 +138,12 @@ export default function CRMSystem() {
                             <h4 className="font-semibold text-gray-900">{msg.customer}</h4>
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                               msg.priority === 'urgent' 
-                                ? 'bg-black text-white' 
-                                : 'bg-gray-200 text-gray-700'
+                                ? 'bg-rose-500 text-white' 
+                                : 'bg-purple-200 text-purple-700'
                             }`}>
                               {msg.priority === 'urgent' ? 'URGENT' : 'NORMAL'}
                             </span>
-                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-600">
                               {msg.platform.toUpperCase()}
                             </span>
                           </div>
@@ -153,17 +153,17 @@ export default function CRMSystem() {
                         
                         {/* Quick Actions */}
                         <div className="mt-3 flex flex-wrap gap-2">
-                          <button className="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                          <button className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
                             Reply
                           </button>
-                          <button className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                          <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
                             Call
                           </button>
-                          <button className="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                          <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
                             Schedule
                           </button>
                           {msg.priority === 'urgent' && (
-                            <button className="bg-gray-800 hover:bg-black text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            <button className="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
                               Escalate
                             </button>
                           )}
@@ -175,15 +175,15 @@ export default function CRMSystem() {
               </div>
               
               {/* Quick Action Bar */}
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+              <div className="mt-6 p-4 bg-purple-50 rounded-lg">
                 <div className="flex flex-wrap gap-3 justify-center">
-                  <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
                     Mark All Read
                   </button>
-                  <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                  <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
                     Bulk Templates
                   </button>
-                  <button className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
                     Analytics
                   </button>
                   <button 
