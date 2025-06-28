@@ -109,6 +109,17 @@ export default function Navigation() {
             </div>
           </div>
 
+          {/* Business Menu Toggle */}
+          <div className="hidden lg:flex items-center mr-4">
+            <button
+              onClick={() => setBusinessCollapsed(!businessCollapsed)}
+              className="flex items-center space-x-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all text-sm font-medium"
+            >
+              <BuildingOfficeIcon className="h-4 w-4" />
+              <span>Business</span>
+            </button>
+          </div>
+
           {/* Right Side - Chat, Store Locator, Social Links */}
           <div className="hidden lg:flex items-center space-x-4">
             {/* Chat Button */}
@@ -236,17 +247,6 @@ export default function Navigation() {
         </div>
       )}
 
-      {/* Business Menu Toggle Button */}
-      {businessCollapsed && (
-        <button
-          onClick={() => setBusinessCollapsed(false)}
-          className="fixed top-20 left-4 z-50 bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition-all hidden lg:block"
-          title="Open Business Menu"
-        >
-          <BuildingOfficeIcon className="h-5 w-5" />
-        </button>
-      )}
-
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="lg:hidden fixed inset-0 z-50 bg-white">
@@ -329,7 +329,7 @@ export default function Navigation() {
                   </button>
                 </div>
                 
-                {businessCollapsed && (
+                {!businessCollapsed && (
                   <div className="space-y-2">
                     {businessItems.map((item) => {
                       const isActive = pathname === item.href
@@ -404,9 +404,9 @@ export default function Navigation() {
                   placeholder="Type your message..."
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                 />
-                              <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                <PaperAirplaneIcon className="h-4 w-4" />
-              </button>
+                <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                  <PaperAirplaneIcon className="h-4 w-4" />
+                </button>
               </div>
             </div>
           </div>
