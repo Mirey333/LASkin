@@ -1,5 +1,5 @@
 {
   "/page": "app/page.js",
-  "/smart-booking/page": "app/smart-booking/page.js",
-  "/crm/page": "app/crm/page.js"
+  "/crm/page": "app/crm/page.js",
+  "/smart-booking/page": "app/smart-booking/page.js"
 }
