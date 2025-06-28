@@ -35,7 +35,7 @@ export default function CRMSystem() {
   const [activeTemplate, setActiveTemplate] = useState<'sms' | 'email' | 'instagram' | 'facebook' | 'twitter'>('email')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       <Navigation />
       
       <div className="pt-32 pb-20">
@@ -44,38 +44,38 @@ export default function CRMSystem() {
           {/* Header */}
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <UserGroupIcon className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-4xl font-light text-gray-900">Advanced CRM Intelligence</h1>
+              <UserGroupIcon className="h-8 w-8 text-black mr-3" />
+              <h1 className="text-4xl font-light text-gray-900">Customer Management</h1>
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              AI-powered customer management with automated workflows and predictive analytics
+              Streamlined customer communications and appointment management
             </p>
           </div>
 
           {/* PRIORITY MESSAGES CHATBOX - ALWAYS ON TOP */}
-          <div className="bg-white rounded-xl shadow-lg border border-red-200 mb-8">
-            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-4 rounded-t-xl">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 mb-8">
+            <div className="bg-black text-white p-4 rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                  <h2 className="text-xl font-bold">🚨 PRIORITY MESSAGES</h2>
-                  <span className="bg-white text-red-500 px-2 py-1 rounded-full text-sm font-bold">LIVE</span>
+                  <h2 className="text-xl font-semibold">Priority Messages</h2>
+                  <span className="bg-white text-black px-2 py-1 rounded-full text-sm font-medium">LIVE</span>
                 </div>
                 <div className="text-sm">
-                  <span className="bg-red-800 px-3 py-1 rounded-full">5 urgent • 18 high</span>
+                  <span className="bg-gray-800 px-3 py-1 rounded-full">3 urgent • 15 normal</span>
                 </div>
               </div>
             </div>
             
             <div className="p-6">
-              {/* High Priority Messages */}
+              {/* Priority Messages */}
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {[
                   {
                     id: 1,
                     customer: 'Sarah Johnson',
-                    platform: 'sms',
-                    message: '🚨 EMERGENCY! Need to cancel my Botox appointment tomorrow - family emergency! Please call me ASAP!',
+                    platform: 'phone',
+                    message: 'Emergency cancellation needed for tomorrow\'s Botox appointment due to family emergency. Please contact me urgently.',
                     time: '2 min ago',
                     priority: 'urgent',
                     unread: true,
@@ -83,20 +83,20 @@ export default function CRMSystem() {
                   },
                   {
                     id: 2,
-                    customer: '@emma_beauty_lover',
-                    platform: 'instagram',
-                    message: '💔 Something went wrong with my Juvederm! My lips are super swollen. Is this normal?? HELP!',
-                    time: '5 min ago',
-                    priority: 'urgent',
+                    customer: 'Alexandra Williams',
+                    platform: 'email',
+                    message: 'Hello! I\'m new to LA Skin and would love to book my first consultation for anti-aging treatments. I\'ve heard amazing things about your Botox and filler work. What would you recommend for a 35-year-old looking to prevent wrinkles? Available any weekday next week.',
+                    time: '8 min ago',
+                    priority: 'normal',
                     unread: true,
-                    avatar: 'EB'
+                    avatar: 'AW'
                   },
                   {
                     id: 3,
                     customer: 'Jennifer Kim',
-                    platform: 'email',
-                    message: 'URGENT: Allergic reaction to LATISSE! Experiencing severe redness and swelling. What should I do?',
-                    time: '12 min ago',
+                    platform: 'text',
+                    message: 'Experiencing unusual swelling after yesterday\'s LATISSE consultation. Should I be concerned? Please advise next steps.',
+                    time: '15 min ago',
                     priority: 'urgent',
                     unread: true,
                     avatar: 'JK'
@@ -104,10 +104,10 @@ export default function CRMSystem() {
                   {
                     id: 4,
                     customer: 'Maria Garcia',
-                    platform: 'facebook',
-                    message: 'Hi! I need to book an appointment ASAP. My wedding is this weekend and I need Botox touch-up!',
-                    time: '18 min ago',
-                    priority: 'high',
+                    platform: 'instagram',
+                    message: 'Wedding emergency! Need Botox touch-up this weekend. Are you available for urgent appointments?',
+                    time: '25 min ago',
+                    priority: 'normal',
                     unread: true,
                     avatar: 'MG'
                   }
@@ -116,20 +116,17 @@ export default function CRMSystem() {
                     key={msg.id}
                     className={`p-4 rounded-lg border-l-4 transition-all hover:shadow-md cursor-pointer ${
                       msg.priority === 'urgent' 
-                        ? 'border-l-red-500 bg-red-50 hover:bg-red-100' 
-                        : 'border-l-orange-500 bg-orange-50 hover:bg-orange-100'
+                        ? 'border-l-black bg-gray-50 hover:bg-gray-100' 
+                        : 'border-l-gray-400 bg-white hover:bg-gray-50'
                     }`}
                   >
                     <div className="flex items-start space-x-3">
-                      <div className={`relative flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${
-                        msg.platform === 'email' ? 'bg-blue-500' : 
-                        msg.platform === 'sms' ? 'bg-green-500' :
-                        msg.platform === 'instagram' ? 'bg-pink-500' :
-                        msg.platform === 'facebook' ? 'bg-blue-600' : 'bg-gray-500'
+                      <div className={`relative flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium ${
+                        msg.priority === 'urgent' ? 'bg-black' : 'bg-gray-600'
                       }`}>
                         {msg.avatar}
                         {msg.unread && (
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-black rounded-full flex items-center justify-center">
                             <div className="w-2 h-2 bg-white rounded-full"></div>
                           </div>
                         )}
@@ -138,44 +135,36 @@ export default function CRMSystem() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <h4 className="font-bold text-gray-900">{msg.customer}</h4>
-                            <span className={`px-2 py-1 rounded-full text-xs font-bold ${
-                              msg.priority === 'urgent' 
-                                ? 'bg-red-500 text-white animate-pulse' 
-                                : 'bg-orange-500 text-white'
-                            }`}>
-                              {msg.priority === 'urgent' ? '🚨 URGENT' : '⚡ HIGH'}
-                            </span>
+                            <h4 className="font-semibold text-gray-900">{msg.customer}</h4>
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              msg.platform === 'email' ? 'bg-blue-100 text-blue-800' : 
-                              msg.platform === 'sms' ? 'bg-green-100 text-green-800' :
-                              msg.platform === 'instagram' ? 'bg-pink-100 text-pink-800' :
-                              msg.platform === 'facebook' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                              msg.priority === 'urgent' 
+                                ? 'bg-black text-white' 
+                                : 'bg-gray-200 text-gray-700'
                             }`}>
-                              {msg.platform === 'email' ? '📧' : 
-                               msg.platform === 'sms' ? '💬' :
-                               msg.platform === 'instagram' ? '📱' :
-                               msg.platform === 'facebook' ? '📘' : '💬'} {msg.platform.toUpperCase()}
+                              {msg.priority === 'urgent' ? 'URGENT' : 'NORMAL'}
+                            </span>
+                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                              {msg.platform.toUpperCase()}
                             </span>
                           </div>
                           <span className="text-xs text-gray-500 font-medium">{msg.time}</span>
                         </div>
-                        <p className="text-sm text-gray-700 mt-2 font-medium">{msg.message}</p>
+                        <p className="text-sm text-gray-700 mt-2 leading-relaxed">{msg.message}</p>
                         
                         {/* Quick Actions */}
                         <div className="mt-3 flex flex-wrap gap-2">
-                          <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
-                            ✅ Quick Reply
+                          <button className="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            Reply
                           </button>
-                          <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
-                            📞 Call Now
+                          <button className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            Call
                           </button>
-                          <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
-                            📅 Emergency Appointment
+                          <button className="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            Schedule
                           </button>
                           {msg.priority === 'urgent' && (
-                            <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
-                              🚨 Escalate to Manager
+                            <button className="bg-gray-800 hover:bg-black text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                              Escalate
                             </button>
                           )}
                         </div>
@@ -188,14 +177,14 @@ export default function CRMSystem() {
               {/* Quick Action Bar */}
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <div className="flex flex-wrap gap-3 justify-center">
-                  <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
-                    🚨 Mark All Urgent Read
+                  <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    Mark All Read
                   </button>
-                  <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
-                    💬 Bulk Reply Templates
+                  <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    Bulk Templates
                   </button>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
-                    📊 Priority Analytics
+                  <button className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    Analytics
                   </button>
                   <button 
                     onClick={() => setActiveTab('messages')}
