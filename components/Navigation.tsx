@@ -253,8 +253,8 @@ export default function Navigation() {
             {/* Status Info */}
             <div className="pt-6 border-t border-gray-200">
               <div className="text-xs text-gray-500 text-center">
-                <div className="font-medium">Jenny's Xpandia Platform</div>
-                <div className="mt-1">Fully Implemented ✨</div>
+                <div className="font-medium">LA Skin Business Portal</div>
+                <div className="mt-1">Management Dashboard 💼</div>
               </div>
             </div>
           </div>
