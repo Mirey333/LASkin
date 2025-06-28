@@ -41,15 +41,35 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
-  // Body class update for business menu state
+  // Direct layout adjustment for business menu state
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (!businessCollapsed) {
-        document.body.classList.add('business-menu-open')
-      } else {
-        document.body.classList.remove('business-menu-open')
+      const mainContent = document.getElementById('main-content')
+      if (mainContent) {
+        if (!businessCollapsed && window.innerWidth >= 1024) {
+          // Desktop: shift content right when menu is open
+          mainContent.style.marginLeft = '288px'
+          mainContent.style.transition = 'margin-left 0.3s ease-in-out'
+        } else {
+          // Mobile or closed menu: no margin
+          mainContent.style.marginLeft = '0px'
+          mainContent.style.transition = 'margin-left 0.3s ease-in-out'
+        }
       }
     }
+
+    // Handle window resize
+    const handleResize = () => {
+      const mainContent = document.getElementById('main-content')
+      if (mainContent && window.innerWidth < 1024) {
+        mainContent.style.marginLeft = '0px'
+      } else if (mainContent && !businessCollapsed && window.innerWidth >= 1024) {
+        mainContent.style.marginLeft = '288px'
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [businessCollapsed])
 
 
