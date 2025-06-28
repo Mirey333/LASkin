@@ -41,29 +41,18 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
-  // Adjust main content margin when business menu opens/closes (desktop only)
+  // Set CSS class on body to control layout
   useEffect(() => {
-    const updateLayout = () => {
-      const mainContent = document.getElementById('main-content')
-      if (mainContent && window.innerWidth >= 1024) { // Only on large screens
-        if (!businessCollapsed) {
-          mainContent.style.marginLeft = '288px'
-          mainContent.style.transition = 'margin-left 0.3s ease'
-        } else {
-          mainContent.style.marginLeft = '0px'
-          mainContent.style.transition = 'margin-left 0.3s ease'
-        }
-      } else if (mainContent) {
-        // On mobile, always reset margin
-        mainContent.style.marginLeft = '0px'
-      }
+    if (!businessCollapsed) {
+      document.body.classList.add('business-menu-open')
+    } else {
+      document.body.classList.remove('business-menu-open')
     }
-
-    updateLayout()
     
-    // Also listen for window resize
-    window.addEventListener('resize', updateLayout)
-    return () => window.removeEventListener('resize', updateLayout)
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('business-menu-open')
+    }
   }, [businessCollapsed])
 
   // Customer area (public)
@@ -233,7 +222,6 @@ export default function Navigation() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={() => setBusinessCollapsed(true)}
                     className={`flex items-center space-x-3 p-3 rounded-lg transition-all group ${
                       isActive 
                         ? 'bg-red-600 text-white shadow-md' 

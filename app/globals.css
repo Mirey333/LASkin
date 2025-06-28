@@ -458,4 +458,16 @@
     backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
+  /* Business Menu Layout */
+  .main-content-with-business-menu {
+    transition: margin-left 0.3s ease;
+  }
+
+  /* When business menu is open on desktop */
+  @media (min-width: 1024px) {
+    body.business-menu-open .main-content-with-business-menu {
+      margin-left: 288px;
+    }
+  }
 } 
