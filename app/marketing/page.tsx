@@ -42,10 +42,11 @@ import {
   BeakerIcon,
   PaintBrushIcon,
   CommandLineIcon,
-  CpuChipIcon,
-  CloudArrowUpIcon,
-  ClipboardDocumentListIcon
-} from '@heroicons/react/24/outline'
+      CpuChipIcon,
+    CloudArrowUpIcon,
+    ClipboardDocumentListIcon,
+    ChevronDownIcon
+  } from '@heroicons/react/24/outline'
 
 export default function AIMarketingHub() {
   const [activeTab, setActiveTab] = useState('ai-creator')
@@ -54,7 +55,7 @@ export default function AIMarketingHub() {
   const [selectedTemplate, setSelectedTemplate] = useState('instagram-post')
   const [contentPrompt, setContentPrompt] = useState('')
   const [selectedTone, setSelectedTone] = useState('luxurious')
-  const [selectedLanguage, setSelectedLanguage] = useState('german')
+  const [selectedLanguage, setSelectedLanguage] = useState('english')
   const [publishSchedule, setPublishSchedule] = useState([])
   const [aiProgress, setAiProgress] = useState(0)
 
@@ -122,10 +123,10 @@ export default function AIMarketingHub() {
 
   // Languages
   const languages = [
-    { id: 'german', name: 'Deutsch', flag: '🇩🇪' },
     { id: 'english', name: 'English', flag: '🇺🇸' },
     { id: 'spanish', name: 'Español', flag: '🇪🇸' },
     { id: 'french', name: 'Français', flag: '🇫🇷' },
+    { id: 'german', name: 'Deutsch', flag: '🇩🇪' },
     { id: 'italian', name: 'Italiano', flag: '🇮🇹' }
   ]
 
@@ -381,7 +382,7 @@ export default function AIMarketingHub() {
                     {/* Language Selection */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-3">
-                        🌍 Sprache
+                        🌍 Language
                       </label>
                       <div className="flex space-x-2">
                         {languages.map((lang) => (

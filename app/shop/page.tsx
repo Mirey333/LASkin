@@ -18,16 +18,21 @@ import {
   RefreshCw,
   Diamond,
   Palette,
-  Zap
+  Zap,
+  TrendingUp
 } from 'lucide-react'
 
 export default function ShopPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('acne')
+  const [selectedSkinType, setSelectedSkinType] = useState('all')
+  const [selectedGoal, setSelectedGoal] = useState('all')
+  const [selectedIngredient, setSelectedIngredient] = useState('all')
   const [cart, setCart] = useState([])
   const [wishlist, setWishlist] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
+  const [showFilters, setShowFilters] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,158 +47,340 @@ export default function ShopPage() {
 
   const products = [
     {
-      id: 1,
-      name: "Botox Aftercare Serum",
-      category: "aftercare",
+      id: 9,
+      name: "MultiFoliant Foamy Cleanser",
+      category: "acne",
+      skinTypes: ["oily", "combination", "normal"],
+      goals: ["acne-treatment"],
+      ingredients: ["salicylic-acid", "glycolic-acid"],
       price: 89.99,
       originalPrice: 119.99,
-      rating: 4.9,
-      reviews: 127,
-      image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop",
-      description: "Premium aftercare serum to enhance and maintain your Botox results.",
-      benefits: ["Extends Botox effects", "Hydrates skin", "Anti-aging formula"],
-      inStock: true,
-      featured: true,
-      badge: "Best Seller",
-      icon: Eye,
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      id: 2,
-      name: "Juvederm Recovery Cream",
-      category: "aftercare",
-      price: 124.99,
-      originalPrice: 149.99,
       rating: 4.8,
-      reviews: 89,
-      image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&h=400&fit=crop",
-      description: "Luxurious recovery cream for post-filler care and enhanced results.",
-      benefits: ["Reduces swelling", "Accelerates healing", "Premium ingredients"],
+      reviews: 523,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/multifoliant_zps6ca92b3e.jpg",
+      description: "Medicated cleansing foam with 2% Salicylic acid and Glycolic acid for enhanced exfoliation.",
+      benefits: ["2% Salicylic acid", "Enhanced exfoliation", "Removes makeup debris"],
       inStock: true,
       featured: true,
-      badge: "VIP Choice",
-      icon: Diamond,
-      gradient: "from-blue-600 to-purple-600"
+      badge: "Medicated Cleanser",
+      icon: Shield,
+      gradient: "from-blue-600 to-cyan-600"
     },
     {
-      id: 3,
-      name: "Latisse Enhancement Kit",
-      category: "enhancement",
-      price: 199.99,
-      originalPrice: 249.99,
+      id: 14,
+      name: "MultiFoliant Daily Exfoliating Pads",
+      category: "acne",
+      skinTypes: ["oily", "combination"],
+      goals: ["acne-treatment"],
+      ingredients: ["salicylic-acid", "glycolic-acid"],
+      price: 94.99,
+      originalPrice: 124.99,
       rating: 4.9,
-      reviews: 156,
-      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop",
-      description: "Complete kit to maximize your Latisse lash growth results.",
-      benefits: ["Maximizes growth", "Includes applicators", "Professional grade"],
+      reviews: 467,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/multifoliantpads_zps7cd20ec3.jpg",
+      description: "Daily pads with Salicylic acid and Oligopeptide-10 for acne treatment and pore clarification.",
+      benefits: ["Salicylic acid formula", "Reduces pore congestion", "60 pads included"],
       inStock: true,
       featured: true,
-      badge: "New",
+      badge: "Daily Treatment",
       icon: Sparkles,
+      gradient: "from-teal-600 to-blue-600"
+    },
+    {
+      id: 15,
+      name: "Tri-Weekly Retinol Pads 0.5%",
+      category: "acne",
+      skinTypes: ["oily", "combination", "normal"],
+      goals: ["acne-treatment", "anti-aging"],
+      ingredients: ["retinol"],
+      price: 149.99,
+      originalPrice: 189.99,
+      rating: 4.7,
+      reviews: 312,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/triweeklypads_zpsa4ea79a1.jpg",
+      description: "0.5% Retinol pads that shrink oil glands and enhance collagen production for healthier skin.",
+      benefits: ["0.5% Retinol strength", "Reduces oiliness", "Builds collagen"],
+      inStock: true,
+      featured: false,
+      badge: "Retinol 0.5%",
+      icon: TrendingUp,
+      gradient: "from-purple-600 to-indigo-600"
+    },
+    {
+      id: 16,
+      name: "Tri-Weekly Retinol Pads 1.0%",
+      category: "acne",
+      price: 179.99,
+      originalPrice: 229.99,
+      rating: 4.8,
+      reviews: 267,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/triweeklypads_zpsa4ea79a1.jpg",
+      description: "1.0% Retinol pads for advanced treatment - strengthens skin and reduces abnormal growths.",
+      benefits: ["1.0% Retinol strength", "Strengthens skin", "Evens texture"],
+      inStock: true,
+      featured: false,
+      badge: "Retinol 1.0%",
+      icon: Award,
+      gradient: "from-violet-600 to-purple-600"
+    },
+    {
+      id: 17,
+      name: "Tri-Weekly Retinol Gel 0.5%",
+      category: "hyperpigmentation",
+      price: 134.99,
+      originalPrice: 169.99,
+      rating: 4.6,
+      reviews: 398,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/triretinolgel_zps1e9d45d5.jpg",
+      description: "Micro-encapsulated 0.5% Retinol gel with gentle delivery system for irritation-free treatment.",
+      benefits: ["Micro-encapsulated delivery", "Gentle on skin", "Airless pump container"],
+      inStock: true,
+      featured: false,
+      badge: "Gentle Formula",
+      icon: Heart,
       gradient: "from-pink-600 to-rose-600"
     },
     {
-      id: 4,
-      name: "Clarisonic Deep Clean Brush",
-      category: "skincare",
-      price: 159.99,
-      originalPrice: 199.99,
-      rating: 4.7,
-      reviews: 203,
-      image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=400&fit=crop",
-      description: "Professional-grade sonic cleansing brush for deeper skin cleansing.",
-      benefits: ["Deep pore cleansing", "Sonic technology", "Multiple brush heads"],
-      inStock: true,
-      featured: false,
-      badge: "",
-      icon: Palette,
-      gradient: "from-indigo-600 to-blue-600"
-    },
-    {
-      id: 5,
-      name: "Vitamin C Brightening Serum",
-      category: "skincare",
+      id: 18,
+      name: "AcnErase Treatment Stick & Concealer",
+      category: "acne",
       price: 79.99,
       originalPrice: 99.99,
-      rating: 4.8,
-      reviews: 174,
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop",
-      description: "High-potency Vitamin C serum for radiant, youthful skin.",
-      benefits: ["Brightens complexion", "Anti-aging", "Antioxidant protection"],
-      inStock: true,
-      featured: false,
-      badge: "",
-      icon: Zap,
-      gradient: "from-yellow-500 to-orange-500"
-    },
-    {
-      id: 6,
-      name: "Hyaluronic Acid Moisturizer",
-      category: "skincare",
-      price: 94.99,
-      originalPrice: 119.99,
       rating: 4.9,
-      reviews: 298,
-      image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=400&fit=crop",
-      description: "Ultra-hydrating moisturizer with premium hyaluronic acid.",
-      benefits: ["Deep hydration", "Plumps skin", "Long-lasting moisture"],
+      reviews: 634,
+      image: "http://www.laskinla.com/Product%20Thumbs/acneStkCov_th.jpg",
+      description: "Two-step treatment system that accelerates healing and reduces scarring potential for active acne.",
+      benefits: ["Dual treatment system", "Reduces inflammation", "Conceals blemishes"],
       inStock: true,
-      featured: false,
-      badge: "",
-      icon: Shield,
-      gradient: "from-teal-600 to-cyan-600"
+      featured: true,
+      badge: "Dual Action",
+      icon: Zap,
+      gradient: "from-red-600 to-orange-600"
     },
     {
-      id: 7,
-      name: "Retinol Night Treatment",
-      category: "treatments",
-      price: 134.99,
-      originalPrice: 159.99,
+      id: 19,
+      name: "HydraMoist Oil-Free Lotion",
+      category: "acne",
+      price: 99.99,
+      originalPrice: 129.99,
       rating: 4.7,
-      reviews: 112,
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop",
-      description: "Professional-strength retinol for overnight skin renewal.",
-      benefits: ["Reduces fine lines", "Improves texture", "Overnight renewal"],
-      inStock: false,
-      featured: false,
-      badge: "Coming Soon",
-      icon: RefreshCw,
-      gradient: "from-purple-700 to-indigo-700"
-    },
-    {
-      id: 8,
-      name: "Eye Rejuvenation Complex",
-      category: "treatments",
-      price: 149.99,
-      originalPrice: 179.99,
-      rating: 4.8,
-      reviews: 87,
-      image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=400&h=400&fit=crop",
-      description: "Advanced eye treatment for dark circles and fine lines.",
-      benefits: ["Reduces dark circles", "Firms eye area", "Peptide complex"],
+      reviews: 445,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/hydramoistoilfree_zpsca28f2b3.jpg",
+      description: "100% oil-free moisturizer with Oligopeptide-10 and ceramides for barrier repair.",
+      benefits: ["100% oil-free", "Barrier repair", "Anti-inflammatory"],
       inStock: true,
       featured: false,
-      badge: "",
+      badge: "Oil-Free",
+      icon: Shield,
+      gradient: "from-cyan-600 to-teal-600"
+    },
+    {
+      id: 20,
+      name: "RetiClear Acne Gel",
+      category: "acne",
+      price: 124.99,
+      originalPrice: 159.99,
+      rating: 4.8,
+      reviews: 387,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/reticlear_zpsd1417632.jpg",
+      description: "Advanced acne gel with 2% Salicylic acid and 0.2% Retinol in micro-encapsulated delivery system.",
+      benefits: ["2% Salicylic acid", "0.2% Retinol", "Mattifying finish"],
+      inStock: true,
+      featured: true,
+      badge: "Advanced Formula",
+      icon: Sparkles,
+            gradient: "from-green-600 to-emerald-600"
+    },
+    {
+      id: 21,
+      name: "LactiFoliant Foamy Cleanser",
+      category: "antiaging",
+      price: 94.99,
+      originalPrice: 124.99,
+      rating: 4.8,
+      reviews: 389,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/lactifoliant_zps3d4e1206.jpg",
+      description: "Foamy cleanser with 3% Lactic acid and 0.5% Salicylic acid for enhanced exfoliation and anti-photoaging.",
+      benefits: ["3% Lactic acid", "Removes excess oils", "Anti-photoaging formula"],
+      inStock: true,
+      featured: true,
+      badge: "Anti-Photoaging",
+      icon: Shield,
+      gradient: "from-purple-600 to-indigo-600"
+    },
+    {
+      id: 22,
+      name: "Twice-Weekly Skin Brightening Pads",
+      category: "hyperpigmentation",
+      price: 119.99,
+      originalPrice: 149.99,
+      rating: 4.7,
+      reviews: 445,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/twiceweeklypads_zps98cdbb29.jpg",
+      description: "Contains 3% Phytic, 5% Lactic and 7% Azaleic acids that even skin color and reduce hyperpigmentation risk.",
+      benefits: ["3% Phytic acid", "5% Lactic acid", "7% Azaleic acid"],
+      inStock: true,
+      featured: true,
+      badge: "Skin Brightening",
+      icon: Sparkles,
+      gradient: "from-yellow-600 to-orange-600"
+    },
+    {
+      id: 23,
+      name: "AdvanC+E Firming Serum",
+      category: "antiaging",
+      price: 179.99,
+      originalPrice: 229.99,
+      rating: 4.9,
+      reviews: 567,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/advanCE_zpsdbf5f2c6.jpg",
+      description: "Contains clinically proven Vitamin C to increase collagen production, with Vitamin E and Ferulic acid.",
+      benefits: ["Increases collagen production", "Vitamin C & E complex", "Ferulic acid antioxidant"],
+      inStock: true,
+      featured: true,
+      badge: "Collagen Boost",
+      icon: TrendingUp,
+      gradient: "from-orange-600 to-red-600"
+    },
+    {
+      id: 24,
+      name: "MoistureLift Peptide Serum",
+      category: "antiaging",
+      price: 149.99,
+      originalPrice: 189.99,
+      rating: 4.8,
+      reviews: 423,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/moisturelift_zps8d442447.jpg",
+      description: "Unique Hyaluronic gel with gentle peptides that boost collagen production and reduce photo-aging signs.",
+      benefits: ["Hyaluronic acid formula", "Collagen-boosting peptides", "Photo-aging reduction"],
+      inStock: true,
+      featured: true,
+      badge: "Peptide Complex",
+      icon: Heart,
+      gradient: "from-pink-600 to-rose-600"
+    },
+    {
+      id: 25,
+      name: "AdvanC+E Firming Eye Cream",
+      category: "eyes",
+      price: 129.99,
+      originalPrice: 159.99,
+      rating: 4.8,
+      reviews: 334,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/advanCEcream_zps82ec9cd3.jpg",
+      description: "Peptide restorative complex for fine lines & wrinkles, puffiness, age-related dark circles, and dry skin around the eye area.",
+      benefits: ["Barrier repair technology treats moisture loss", "Gentle Vitamin C combined with peptides", "Contains Acetyl Hexapeptide-3"],
+      inStock: true,
+      featured: true,
+      badge: "Eye Firming",
       icon: Eye,
       gradient: "from-emerald-600 to-teal-600"
+    },
+    {
+      id: 26,
+      name: "AdvanC+K Dark Circle Eye Cream",
+      category: "eyes",
+      price: 139.99,
+      originalPrice: 179.99,
+      rating: 4.7,
+      reviews: 298,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/advanCKcream_zpsc4fab14c.jpg",
+      description: "Targets the two main causes of dark circles with a combination of skin brighteners, peptides and flavonoids.",
+      benefits: ["Vitamin K, Chrysin and H-hydroxysuccinimide", "Kojic Acid, Arbutin, Rumex Extract", "Antioxidants Vitamin C, E and Green Tea"],
+      inStock: true,
+      featured: true,
+      badge: "Dark Circle Fighter",
+      icon: Eye,
+      gradient: "from-violet-600 to-purple-600"
+    },
+    {
+      id: 27,
+      name: "PoreMinimizer Treatment Stick",
+      category: "antiaging",
+      price: 89.99,
+      originalPrice: 119.99,
+      rating: 4.6,
+      reviews: 267,
+      image: "http://www.laskinla.com/Product%20Thumbs/poreStk_th.jpg",
+      description: "Helps improve enlarged pores with Enantia chlorantha and Oleanolic acid to reduce oil gland activity.",
+      benefits: ["Reduces enlarged pores", "Controls oil production", "Trichloroacetic acid exfoliation"],
+      inStock: true,
+      featured: false,
+      badge: "Pore Treatment",
+      icon: Award,
+      gradient: "from-blue-600 to-cyan-600"
+    },
+    {
+      id: 28,
+      name: "HydraMoist Face Lotion",
+      category: "antiaging",
+      price: 104.99,
+      originalPrice: 134.99,
+      rating: 4.9,
+      reviews: 445,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/hydramoist_zpsf1a1c219.jpg",
+      description: "Barrier repair lotion with ceramides, fatty acids and cholesterol to restore natural moisture barrier.",
+      benefits: ["Ceramide complex", "Barrier repair technology", "Reduces irritation & redness"],
+      inStock: true,
+      featured: false,
+      badge: "Barrier Repair",
+      icon: Shield,
+      gradient: "from-teal-600 to-green-600"
+    },
+    {
+      id: 29,
+      name: "Daily Solar Defense SPF 65",
+      category: "sunprotection",
+      price: 79.99,
+      originalPrice: 99.99,
+      rating: 4.9,
+      reviews: 567,
+      image: "http://www.laskinla.com/Product%20Thumbs/spf_th.jpg",
+      description: "Helps to prevent and reduce the damaging effects of the sun's ultraviolet light and reactions associated with sun damage.",
+      benefits: ["SPF 65 protection", "Prevents UV damage", "Airless pump container"],
+      inStock: true,
+      featured: true,
+      badge: "SPF 65",
+      icon: Shield,
+      gradient: "from-orange-600 to-yellow-600"
+    },
+    {
+      id: 30,
+      name: "Daily Solar Defense SPF 58",
+      category: "sunprotection",
+      price: 74.99,
+      originalPrice: 94.99,
+      rating: 4.8,
+      reviews: 423,
+      image: "http://i919.photobucket.com/albums/ad35/laskinla/solarsport_zpsd69e94ba.jpg",
+      description: "Helps to prevent and reduce the damaging effects of the sun's ultraviolet light and reactions associated with sun damage.",
+      benefits: ["SPF 58 protection", "Sport formula", "Water-resistant"],
+      inStock: true,
+      featured: true,
+      badge: "SPF 58",
+      icon: Shield,
+      gradient: "from-yellow-600 to-orange-600"
     }
   ]
 
   const categories = [
-    { id: 'all', name: 'All Products', count: products.length },
-    { id: 'aftercare', name: 'Aftercare', count: products.filter(p => p.category === 'aftercare').length },
-    { id: 'skincare', name: 'Skincare', count: products.filter(p => p.category === 'skincare').length },
-    { id: 'enhancement', name: 'Enhancement', count: products.filter(p => p.category === 'enhancement').length },
-    { id: 'treatments', name: 'Treatments', count: products.filter(p => p.category === 'treatments').length }
+    { id: 'acne', name: 'Acne Treatment', count: products.filter(p => p.category === 'acne').length },
+    { id: 'antiaging', name: 'Anti-Aging', count: products.filter(p => p.category === 'antiaging').length },
+    { id: 'hyperpigmentation', name: 'Hyperpigmentation', count: products.filter(p => p.category === 'hyperpigmentation').length },
+    { id: 'eyes', name: 'Eyes', count: products.filter(p => p.category === 'eyes').length },
+    { id: 'sunprotection', name: 'Sun Protection', count: products.filter(p => p.category === 'sunprotection').length },
+    { id: 'laboratories', name: 'LA Skin Labs', count: products.filter(p => p.category === 'laboratories').length }
   ]
 
   const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory
+    const matchesCategory = product.category === selectedCategory
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesSkinType = selectedSkinType === 'all' || product.skinTypes.includes(selectedSkinType)
+    const matchesGoal = selectedGoal === 'all' || product.goals.includes(selectedGoal)
+    const matchesIngredient = selectedIngredient === 'all' || product.ingredients.includes(selectedIngredient)
+    
+    return matchesCategory && matchesSearch && matchesSkinType && matchesGoal && matchesIngredient
   })
-
-  const featuredProducts = products.filter(product => product.featured)
 
   const addToCart = (product) => {
     setCart(prev => {
@@ -219,6 +406,37 @@ export default function ShopPage() {
 
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
+
+  // Erweiterte Filteroptionen
+  const skinTypes = [
+    { id: 'all', name: 'All Skin Types' },
+    { id: 'oily', name: 'Oily Skin' },
+    { id: 'dry', name: 'Dry Skin' },
+    { id: 'combination', name: 'Combination Skin' },
+    { id: 'sensitive', name: 'Sensitive Skin' },
+    { id: 'normal', name: 'Normal Skin' }
+  ]
+
+  const goals = [
+    { id: 'all', name: 'All Goals' },
+    { id: 'anti-aging', name: 'Anti-Aging' },
+    { id: 'acne-treatment', name: 'Acne Treatment' },
+    { id: 'hydration', name: 'Hydration' },
+    { id: 'brightening', name: 'Brightening' },
+    { id: 'sun-protection', name: 'Sun Protection' },
+    { id: 'eye-care', name: 'Eye Care' }
+  ]
+
+  const ingredients = [
+    { id: 'all', name: 'All Ingredients' },
+    { id: 'salicylic-acid', name: 'Salicylic Acid' },
+    { id: 'retinol', name: 'Retinol' },
+    { id: 'vitamin-c', name: 'Vitamin C' },
+    { id: 'hyaluronic-acid', name: 'Hyaluronic Acid' },
+    { id: 'peptides', name: 'Peptides' },
+    { id: 'spf', name: 'SPF' },
+    { id: 'glycolic-acid', name: 'Glycolic Acid' }
+  ]
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -253,34 +471,21 @@ export default function ShopPage() {
       </div>
 
       {/* Hero Section - Dark */}
-      <section className="relative min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
+      <section className="relative bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
         <div className="absolute inset-0 bg-black/20" />
         
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
-            {Array.from({ length: 400 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="border border-white/10 animate-pulse"
-                style={{ animationDelay: `${i * 0.01}s` }}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="relative z-10 pt-32 pb-20">
+        <div className="relative z-10 pt-32 pb-12">
           <div className="container mx-auto px-6">
             
             {/* Header */}
-            <div className="text-center mb-16">
-              <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/80 text-sm mb-6 border border-white/20">
+            <div className="text-center mb-8">
+              <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/80 text-sm mb-4 border border-white/20">
                 🛍️ Premium Beauty Products
               </div>
-              <h1 className="text-7xl md:text-9xl font-thin text-white mb-6 tracking-tight">
+              <h1 className="text-5xl md:text-7xl font-thin text-white mb-4 tracking-tight">
                 LA <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Shop</span>
               </h1>
-              <p className="text-2xl md:text-3xl text-white/80 mb-8 font-light max-w-4xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-white/80 mb-6 font-light max-w-3xl mx-auto leading-relaxed">
                 Professional-grade skincare and aftercare products curated by experts
               </p>
               
@@ -293,136 +498,164 @@ export default function ShopPage() {
               )}
             </div>
 
-            {/* Search & Filters */}
-            <div className="max-w-4xl mx-auto mb-16">
-              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6">
-                <div className="flex flex-col md:flex-row gap-4">
-                  {/* Search */}
-                  <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
-                    <input
-                      type="text"
-                      placeholder="Search products..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    />
-                  </div>
-                  
-                  {/* Categories */}
-                  <div className="flex gap-2 overflow-x-auto">
-                    {categories.map((category) => (
-                      <button
-                        key={category.id}
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all ${
-                          selectedCategory === category.id
-                            ? 'bg-white text-gray-900'
-                            : 'bg-white/10 text-white hover:bg-white/20'
-                        }`}
-                      >
-                        {category.name} ({category.count})
-                      </button>
-                    ))}
-                  </div>
+            {/* Product Categories */}
+            <div className="max-w-6xl mx-auto mb-4">
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4">
+                <div className="flex gap-2 overflow-x-auto justify-center">
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`px-4 py-3 rounded-lg whitespace-nowrap font-medium transition-all text-sm ${
+                        selectedCategory === category.id
+                          ? 'bg-white text-gray-900'
+                          : 'bg-white/10 text-white hover:bg-white/20'
+                      }`}
+                    >
+                      {category.name} ({category.count})
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Featured Products in Hero */}
-            {selectedCategory === 'all' && (
-              <div className="mb-20">
-                <h2 className="text-4xl font-light text-white mb-8 text-center">Featured Products</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  {featuredProducts.map((product, index) => {
-                    const IconComponent = product.icon
-                    return (
-                      <div
-                        key={product.id}
-                        className={`group relative overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 hover:scale-105 hover:bg-white/15 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                        style={{ 
-                          animationDelay: `${index * 100}ms`,
-                          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-                        }}
-                      >
-                        {/* Badge */}
-                        {product.badge && (
-                          <div className={`absolute top-4 right-4 px-3 py-1 bg-gradient-to-r ${product.gradient} text-white text-xs font-medium rounded-full`}>
-                            {product.badge}
-                          </div>
-                        )}
-
-                        {/* Icon */}
-                        <div className={`w-16 h-16 bg-gradient-to-r ${product.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                          <IconComponent className="w-8 h-8 text-white" />
-                        </div>
-
-                        {/* Content */}
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="text-xl font-light text-white mb-2">{product.name}</h3>
-                            <p className="text-white/70 text-sm leading-relaxed">{product.description}</p>
-                          </div>
-
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <div className="text-2xl font-light text-white">${product.price}</div>
-                              {product.originalPrice > product.price && (
-                                <div className="text-white/60 text-sm line-through">${product.originalPrice}</div>
-                              )}
-                            </div>
-                            <div className="text-right">
-                              <div className="flex items-center text-yellow-400 mb-1">
-                                <Star className="w-4 h-4 mr-1 fill-current" />
-                                <span className="text-sm">{product.rating}</span>
-                              </div>
-                              <div className="text-white/60 text-xs">({product.reviews} reviews)</div>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => addToCart(product)}
-                              disabled={!product.inStock}
-                              className={`flex-1 py-3 rounded-xl text-center font-medium transition-all ${
-                                product.inStock
-                                  ? `bg-gradient-to-r ${product.gradient} text-white hover:scale-105`
-                                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                              }`}
-                            >
-                              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                            </button>
-                            <button
-                              onClick={() => toggleWishlist(product.id)}
-                              className={`p-3 rounded-xl transition-all ${
-                                wishlist.includes(product.id)
-                                  ? 'bg-red-500 text-white'
-                                  : 'bg-white/10 text-white hover:bg-white/20'
-                              }`}
-                            >
-                              <Heart className={`w-5 h-5 ${wishlist.includes(product.id) ? 'fill-current' : ''}`} />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })}
+            {/* Search Bar - Smaller */}
+            <div className="max-w-4xl mx-auto mb-4">
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-3">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  />
                 </div>
               </div>
-            )}
+            </div>
+
+            {/* Erweiterte Filter */}
+            <div className="max-w-6xl mx-auto mb-6">
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-white font-semibold text-lg">Filters</h3>
+                  <button 
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="text-white/80 hover:text-white transition-colors"
+                  >
+                    {showFilters ? 'Hide Filters' : 'Show More Filters'}
+                  </button>
+                </div>
+
+                {showFilters && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Hauttyp Filter */}
+                    <div>
+                      <label className="block text-white/90 font-medium mb-3">Skin Type</label>
+                      <select 
+                        value={selectedSkinType}
+                        onChange={(e) => setSelectedSkinType(e.target.value)}
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      >
+                        {skinTypes.map(type => (
+                          <option key={type.id} value={type.id} className="bg-gray-800 text-white">
+                            {type.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Ziel Filter */}
+                    <div>
+                      <label className="block text-white/90 font-medium mb-3">Goal</label>
+                      <select 
+                        value={selectedGoal}
+                        onChange={(e) => setSelectedGoal(e.target.value)}
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      >
+                        {goals.map(goal => (
+                          <option key={goal.id} value={goal.id} className="bg-gray-800 text-white">
+                            {goal.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Inhaltsstoff Filter */}
+                    <div>
+                      <label className="block text-white/90 font-medium mb-3">Main Ingredient</label>
+                      <select 
+                        value={selectedIngredient}
+                        onChange={(e) => setSelectedIngredient(e.target.value)}
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      >
+                        {ingredients.map(ingredient => (
+                          <option key={ingredient.id} value={ingredient.id} className="bg-gray-800 text-white">
+                            {ingredient.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Aktive Filter anzeigen */}
+                {(selectedSkinType !== 'all' || selectedGoal !== 'all' || selectedIngredient !== 'all') && (
+                  <div className="mt-4 pt-4 border-t border-white/20">
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-white/80 text-sm">Active Filters:</span>
+                      {selectedSkinType !== 'all' && (
+                        <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm flex items-center">
+                          {skinTypes.find(t => t.id === selectedSkinType)?.name}
+                          <button 
+                            onClick={() => setSelectedSkinType('all')}
+                            className="ml-2 hover:text-gray-200"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      )}
+                      {selectedGoal !== 'all' && (
+                        <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm flex items-center">
+                          {goals.find(g => g.id === selectedGoal)?.name}
+                          <button 
+                            onClick={() => setSelectedGoal('all')}
+                            className="ml-2 hover:text-gray-200"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      )}
+                      {selectedIngredient !== 'all' && (
+                        <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm flex items-center">
+                          {ingredients.find(i => i.id === selectedIngredient)?.name}
+                          <button 
+                            onClick={() => setSelectedIngredient('all')}
+                            className="ml-2 hover:text-gray-200"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Light Section - Products and Other Content */}
-      <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
+      <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-8">
         <div className="container mx-auto px-6">
           {/* Products Grid */}
-          <div className="py-16">
+          <div className="py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-16">
+              <div className="text-center mb-8">
                 <h2 className="text-5xl font-thin mb-6 bg-gradient-to-r from-gray-900 to-purple-600 bg-clip-text text-transparent">
-                  All Products
+                  {categories.find(cat => cat.id === selectedCategory)?.name || 'Products'}
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Discover our complete collection of professional-grade beauty products
