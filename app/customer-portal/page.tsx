@@ -385,7 +385,7 @@ export default function CustomerPortal() {
               {/* Upcoming Appointments */}
               <div className="bg-white rounded-xl shadow-lg border">
                 <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900">Kommende Termine</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">Upcoming Appointments</h3>
                 </div>
                 <div className="p-6">
                   <div className="space-y-4">
@@ -500,7 +500,7 @@ export default function CustomerPortal() {
                 <div className="text-center">
                   <TrophyIcon className="h-16 w-16 mx-auto mb-4 text-yellow-300" />
                   <h2 className="text-3xl font-light mb-2">Platinum VIP Status</h2>
-                  <p className="text-purple-100 text-lg">Exklusive Vorteile für unsere wertvollsten Kunden</p>
+                  <p className="text-purple-100 text-lg">Exclusive benefits for our most valued customers</p>
                 </div>
               </div>
 
@@ -508,7 +508,7 @@ export default function CustomerPortal() {
               <div className="bg-white rounded-xl shadow-lg border">
                 <div className="p-6 border-b border-gray-200">
                   <h3 className="text-xl font-semibold text-gray-900">🌟 Exklusive VIP Features</h3>
-                  <p className="text-gray-600 mt-2">Premium Tools für unsere VIP-Kunden</p>
+                  <p className="text-gray-600 mt-2">Premium tools for our VIP customers</p>
                 </div>
                 <div className="p-6">
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

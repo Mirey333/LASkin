@@ -459,5 +459,14 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-
+  /* Business Menu Layout - Content Shifting */
+  @media (min-width: 1024px) {
+    .business-menu-open #main-content {
+      margin-left: 288px !important;
+    }
+    
+    #main-content {
+      transition: margin-left 0.3s ease-in-out;
+    }
+  }
 } 

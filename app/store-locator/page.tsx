@@ -227,7 +227,7 @@ export default function StoreLocatorPage() {
                         </span>
                       ))}
                       {location.services.length > 3 && (
-                        <span className="text-xs text-gray-500">+{location.services.length - 3} mehr</span>
+                        <span className="text-xs text-gray-500">+{location.services.length - 3} more</span>
                       )}
                     </div>
                   </div>

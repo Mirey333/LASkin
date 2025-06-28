@@ -338,21 +338,21 @@ export default function CRMSystem() {
                       </span>
                     </div>
                   </div>
-                  <div className="space-y-2 text-sm">
+                                      <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Ausgaben:</span>
+                      <span className="text-gray-600">Spending:</span>
                       <span className="font-medium">$12,450</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Zufriedenheit:</span>
+                      <span className="text-gray-600">Satisfaction:</span>
                       <div className="flex items-center">
                         <StarIcon className="h-4 w-4 text-yellow-400 mr-1" />
                         <span>4.9</span>
                       </div>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Empfehlungen:</span>
-                      <span className="font-medium">3 Kunden</span>
+                      <span className="text-gray-600">Referrals:</span>
+                      <span className="font-medium">3 Customers</span>
                     </div>
                   </div>
                 </div>

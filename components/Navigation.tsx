@@ -41,29 +41,15 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
-  // Layout anpassung wenn Business-Menü geöffnet/geschlossen wird
+  // Body class update for business menu state
   useEffect(() => {
-    const mainContent = document.getElementById('main-content')
-    if (mainContent && window.innerWidth >= 1024) { // Nur auf Desktop
+    if (typeof window !== 'undefined') {
       if (!businessCollapsed) {
-        mainContent.style.marginLeft = '288px'
-        mainContent.style.transition = 'margin-left 0.3s ease'
+        document.body.classList.add('business-menu-open')
       } else {
-        mainContent.style.marginLeft = '0px'
-        mainContent.style.transition = 'margin-left 0.3s ease'
+        document.body.classList.remove('business-menu-open')
       }
     }
-    
-    // Cleanup on resize
-    const handleResize = () => {
-      const mainContent = document.getElementById('main-content')
-      if (mainContent && window.innerWidth < 1024) {
-        mainContent.style.marginLeft = '0px'
-      }
-    }
-    
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
   }, [businessCollapsed])
 
 

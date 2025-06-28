@@ -80,7 +80,7 @@ export default function SmartBookingSystem() {
                 }`}
               >
                 <CalendarIcon className="h-5 w-5" />
-                <span>Tagesplaner</span>
+                <span>Daily Scheduler</span>
               </button>
               <button
                 onClick={() => setActiveTab('optimization')}
@@ -107,7 +107,7 @@ export default function SmartBookingSystem() {
             </div>
           </div>
 
-          {/* Tagesplaner */}
+                      {/* Daily Scheduler */}
           {activeTab === 'calendar' && (
             <div className="space-y-8">
               
@@ -116,28 +116,28 @@ export default function SmartBookingSystem() {
                 <div className="bg-white rounded-xl p-6 shadow-lg border text-center">
                   <CalendarIcon className="h-8 w-8 text-indigo-600 mx-auto mb-3" />
                   <div className="text-3xl font-light text-gray-900 mb-1">12</div>
-                  <div className="text-sm text-gray-600">Termine heute</div>
+                  <div className="text-sm text-gray-600">Appointments today</div>
                   <div className="text-sm text-indigo-600 mt-1">89% Auslastung</div>
                 </div>
                 
                 <div className="bg-white rounded-xl p-6 shadow-lg border text-center">
                   <ClockIcon className="h-8 w-8 text-green-600 mx-auto mb-3" />
                   <div className="text-3xl font-light text-gray-900 mb-1">7.5h</div>
-                  <div className="text-sm text-gray-600">Behandlungszeit</div>
+                  <div className="text-sm text-gray-600">Treatment time</div>
                   <div className="text-sm text-green-600 mt-1">+30min möglich</div>
                 </div>
                 
                 <div className="bg-white rounded-xl p-6 shadow-lg border text-center">
                   <TrophyIcon className="h-8 w-8 text-purple-600 mx-auto mb-3" />
                   <div className="text-3xl font-light text-gray-900 mb-1">$3,420</div>
-                  <div className="text-sm text-gray-600">Tagesumsatz</div>
+                  <div className="text-sm text-gray-600">Daily revenue</div>
                   <div className="text-sm text-purple-600 mt-1">+$920 Potenzial</div>
                 </div>
                 
                 <div className="bg-white rounded-xl p-6 shadow-lg border text-center">
-                  <StarIcon className="h-8 w-8 text-yellow-600 mx-auto mb-3" />
-                  <div className="text-3xl font-light text-gray-900 mb-1">4.9</div>
-                  <div className="text-sm text-gray-600">Kundenzufriedenheit</div>
+                                      <StarIcon className="h-8 w-8 text-yellow-600 mx-auto mb-3" />
+                    <div className="text-3xl font-light text-gray-900 mb-1">4.9</div>
+                    <div className="text-sm text-gray-600">Customer satisfaction</div>
                   <div className="text-sm text-yellow-600 mt-1">Exzellent</div>
                 </div>
               </div>
