@@ -41,40 +41,22 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
-  // Adjust main content margin when business menu opens/closes
-  useEffect(() => {
-    const updateLayout = () => {
-      const mainContent = document.getElementById('main-content')
-      if (mainContent) {
-        if (!businessCollapsed && window.innerWidth >= 1024) { 
-          // Business menu open on desktop
-          mainContent.style.marginLeft = '288px'
-          mainContent.style.transition = 'margin-left 0.3s ease'
-        } else {
-          // Business menu closed or mobile
-          mainContent.style.marginLeft = '0px'
-          mainContent.style.transition = 'margin-left 0.3s ease'
-        }
-      }
-    }
 
-    updateLayout()
-    
-    // Listen for window resize
-    const handleResize = () => updateLayout()
-    window.addEventListener('resize', handleResize)
+
+  // Customer area (public)
+  // Body class for layout control
+  useEffect(() => {
+    if (!businessCollapsed) {
+      document.body.classList.add('business-menu-open')
+    } else {
+      document.body.classList.remove('business-menu-open')
+    }
     
     return () => {
-      window.removeEventListener('resize', handleResize)
-      // Reset on unmount
-      const mainContent = document.getElementById('main-content')
-      if (mainContent) {
-        mainContent.style.marginLeft = '0px'
-      }
+      document.body.classList.remove('business-menu-open')
     }
   }, [businessCollapsed])
 
-  // Customer area (public)
   const customerItems = [
     { name: 'Home', href: '/', icon: HomeIcon },
     { name: 'Treatments', href: '/services', icon: BeakerIcon },
@@ -213,10 +195,11 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Business Sidebar - Left - Collapsible */}
-      {!businessCollapsed && (
-        <div className="fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:flex flex-col">
-          <div className="p-4 flex-1 flex flex-col">
+      {/* Business Sidebar - Left - Fixed */}
+      <div className={`fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:flex flex-col transform transition-transform duration-300 ease-in-out ${
+        businessCollapsed ? '-translate-x-full' : 'translate-x-0'
+      }`}>
+        <div className="p-4 flex-1 flex flex-col">
           
             {/* Header with Close Button */}
             <div className="flex items-center justify-between mb-4">
@@ -263,7 +246,6 @@ export default function Navigation() {
             </div>
           </div>
         </div>
-      )}
 
       {/* Business Menu Toggle Button */}
       {businessCollapsed && (
