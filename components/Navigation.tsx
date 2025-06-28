@@ -44,18 +44,7 @@ export default function Navigation() {
 
 
   // Customer area (public)
-  // Body class for layout control
-  useEffect(() => {
-    if (!businessCollapsed) {
-      document.body.classList.add('business-menu-open')
-    } else {
-      document.body.classList.remove('business-menu-open')
-    }
-    
-    return () => {
-      document.body.classList.remove('business-menu-open')
-    }
-  }, [businessCollapsed])
+
 
   const customerItems = [
     { name: 'Home', href: '/', icon: HomeIcon },
@@ -195,10 +184,9 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Business Sidebar - Left - Fixed */}
-      <div className={`fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:flex flex-col transform transition-transform duration-300 ease-in-out ${
-        businessCollapsed ? '-translate-x-full' : 'translate-x-0'
-      }`}>
+      {/* Business Sidebar - Left - Simple Show/Hide */}
+      {!businessCollapsed && (
+        <div className="fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:flex flex-col">
         <div className="p-4 flex-1 flex flex-col">
           
             {/* Header with Close Button */}
@@ -246,6 +234,7 @@ export default function Navigation() {
             </div>
           </div>
         </div>
+      )}
 
       {/* Business Menu Toggle Button */}
       {businessCollapsed && (

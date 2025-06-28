@@ -459,19 +459,5 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  /* Business Menu Layout */
-  .business-menu-open #main-content {
-    margin-left: 288px;
-    transition: margin-left 0.3s ease;
-  }
 
-  #main-content {
-    transition: margin-left 0.3s ease;
-  }
-
-  @media (max-width: 1024px) {
-    .business-menu-open #main-content {
-      margin-left: 0 !important;
-    }
-  }
 } 
