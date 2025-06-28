@@ -59,10 +59,12 @@ export default function PhotoEditorPage() {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        setSelectedImage(e.target.result)
-        setProcessedImage(null)
-        setActiveFilter('none')
-        setShowBeforeAfter(false)
+        if (e.target?.result) {
+          setSelectedImage(e.target.result)
+          setProcessedImage(null)
+          setActiveFilter('none')
+          setShowBeforeAfter(false)
+        }
       }
       reader.readAsDataURL(file)
     }

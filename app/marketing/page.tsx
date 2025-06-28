@@ -51,7 +51,7 @@ import {
 export default function AIMarketingHub() {
   const [activeTab, setActiveTab] = useState('ai-creator')
   const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedContent, setGeneratedContent] = useState(null)
+  const [generatedContent, setGeneratedContent] = useState<any>(null)
   const [selectedTemplate, setSelectedTemplate] = useState('instagram-post')
   const [contentPrompt, setContentPrompt] = useState('')
   const [selectedTone, setSelectedTone] = useState('luxurious')

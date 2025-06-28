@@ -10,8 +10,8 @@ import Link from 'next/link'
 
 export default function BookingPage() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const [selectedService, setSelectedService] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState<any>(null)
+  const [selectedService, setSelectedService] = useState<any>(null)
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState('')
   const [customerInfo, setCustomerInfo] = useState({
@@ -180,7 +180,7 @@ export default function BookingPage() {
 
   // Verfügbare Daten (nächste 14 Tage, außer Sonntag)
   const getAvailableDates = () => {
-    const dates = []
+    const dates: { value: string; label: string }[] = []
     const today = new Date()
     
     for (let i = 1; i <= 14; i++) {

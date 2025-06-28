@@ -12,7 +12,7 @@ import Navigation from '../../../components/Navigation'
 
 export default function BlogPostPage() {
   const params = useParams()
-  const postId = Array.isArray(params.postId) ? params.postId[0] : params.postId
+  const postId = params?.postId ? (Array.isArray(params.postId) ? params.postId[0] : params.postId) : '1'
   
   const [isLiked, setIsLiked] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
