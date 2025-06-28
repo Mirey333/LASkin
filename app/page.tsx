@@ -136,56 +136,156 @@ export default function HomePage() {
         />
       </div>
 
-      {/* Hero Section - Ultra Modern */}
+      {/* Hero Section - Großes Visual mit Claim + CTAs */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/30" />
         
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
-            {Array.from({ length: 400 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="border border-white/10 animate-pulse"
-                style={{ animationDelay: `${i * 0.01}s` }}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Hero Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&h=1080&fit=crop')"
+          }}
+        />
 
         <div className={`relative z-10 text-center px-6 transition-all duration-2000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Badge */}
           <div className="mb-8">
-            <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/80 text-sm mb-6 border border-white/20">
-              🏆 #1 Premium Beauty Lab in LA
+            <div className="inline-block px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm mb-6 border border-white/20">
+              ✨ LA's Premium Beauty Destination
             </div>
           </div>
           
-          <h1 className="text-7xl md:text-9xl font-thin text-white mb-6 tracking-tight">
-            LA <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Skin</span>
+          {/* Main Claim */}
+          <h1 className="text-6xl md:text-8xl font-thin text-white mb-6 tracking-tight leading-tight">
+            Discover Your<br />
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-light">
+              Perfect Skin
+            </span>
           </h1>
           
-          <p className="text-2xl md:text-3xl text-white/80 mb-8 font-light max-w-4xl mx-auto leading-relaxed">
-            Where <span className="text-purple-300">precision</span> meets <span className="text-pink-300">artistry</span>.<br />
-            Experience the future of aesthetic medicine.
+          <p className="text-xl md:text-2xl text-white/90 mb-12 font-light max-w-4xl mx-auto leading-relaxed">
+            Premium skincare products and professional treatments<br />
+            for your individual beauty journey
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Link href="/booking" className="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25">
-              <span className="relative z-10 flex items-center">
-                <Zap className="w-5 h-5 mr-2" />
-                Book Consultation
+          {/* Main CTAs - Shop + Behandlungen */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+            <Link href="/shop" className="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 min-w-[200px]">
+              <span className="relative z-10 flex items-center justify-center">
+                <Sparkles className="w-6 h-6 mr-3" />
+                Shop Products
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
             
-            <Link href="/services" className="group flex items-center text-white border-2 border-white/30 px-10 py-4 rounded-2xl font-medium hover:bg-white/10 hover:border-white/50 transition-all duration-300">
-              <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Explore Services
+            <Link href="/services" className="group relative overflow-hidden bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-semibold text-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 min-w-[200px]">
+              <span className="flex items-center justify-center">
+                <Diamond className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                Treatments
+              </span>
             </Link>
+          </div>
+
+          {/* Quick Features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <Eye className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+              <h3 className="text-white font-semibold mb-2">Authentic Products</h3>
+              <p className="text-white/70 text-sm">LA Skin Laboratories Original Products</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <Diamond className="w-8 h-8 text-pink-400 mx-auto mb-3" />
+              <h3 className="text-white font-semibold mb-2">Premium Treatments</h3>
+              <p className="text-white/70 text-sm">Botox, Juvéderm, Latisse & more</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <Sparkles className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+              <h3 className="text-white font-semibold mb-2">Complete Consultation</h3>
+              <p className="text-white/70 text-sm">Individual skin analysis & recommendations</p>
+            </div>
           </div>
           
           <div className="animate-bounce">
             <ChevronDown className="w-8 h-8 text-white/60 mx-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Access Section */}
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 relative">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-thin mb-6 bg-gradient-to-r from-gray-900 to-purple-600 bg-clip-text text-transparent">
+              Your beauty journey starts here
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover the perfect combination of premium products and professional treatments
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Shop Card */}
+            <div className="group bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Shop</h3>
+                  <p className="text-gray-600">Premium skincare products</p>
+                </div>
+              </div>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Acne, Anti-Aging, Eyes & Sun Protection</span>
+                </div>
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>LA Skin Laboratories Original Products</span>
+                </div>
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Delivered directly to your home</span>
+                </div>
+              </div>
+              <Link href="/shop" className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-center py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                Discover Products
+                <ArrowRight className="w-5 h-5 inline ml-2" />
+              </Link>
+            </div>
+
+            {/* Services Card */}
+            <div className="group bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4">
+                  <Diamond className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Treatments</h3>
+                  <p className="text-gray-600">Professional beauty treatments</p>
+                </div>
+              </div>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Botox, Juvéderm, Latisse & Clarisonic</span>
+                </div>
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Experienced beauty experts</span>
+                </div>
+                <div className="flex items-center text-gray-700">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Individual consultation included</span>
+                </div>
+              </div>
+              <Link href="/services" className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                Book Appointment
+                <ArrowRight className="w-5 h-5 inline ml-2" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

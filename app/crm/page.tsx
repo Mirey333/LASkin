@@ -16,12 +16,23 @@ import {
   LightBulbIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
-  InformationCircleIcon
+  InformationCircleIcon,
+  EnvelopeIcon,
+  ChatBubbleBottomCenterTextIcon,
+  PhoneIcon,
+  CalendarDaysIcon,
+  PlusIcon,
+  DocumentTextIcon,
+  ClockIcon,
+  ArrowRightIcon
 } from '@heroicons/react/24/outline'
 
 export default function CRMSystem() {
   const [activeTab, setActiveTab] = useState('customers')
   const [aiChatOpen, setAiChatOpen] = useState(false)
+  const [selectedMessage, setSelectedMessage] = useState<number | null>(null)
+  const [messageReply, setMessageReply] = useState('')
+  const [activeTemplate, setActiveTemplate] = useState<'sms' | 'email' | 'instagram' | 'facebook' | 'twitter'>('email')
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -39,6 +50,162 @@ export default function CRMSystem() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               AI-powered customer management with automated workflows and predictive analytics
             </p>
+          </div>
+
+          {/* PRIORITY MESSAGES CHATBOX - ALWAYS ON TOP */}
+          <div className="bg-white rounded-xl shadow-lg border border-red-200 mb-8">
+            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-4 rounded-t-xl">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                  <h2 className="text-xl font-bold">🚨 PRIORITY MESSAGES</h2>
+                  <span className="bg-white text-red-500 px-2 py-1 rounded-full text-sm font-bold">LIVE</span>
+                </div>
+                <div className="text-sm">
+                  <span className="bg-red-800 px-3 py-1 rounded-full">5 urgent • 18 high</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              {/* High Priority Messages */}
+              <div className="space-y-4 max-h-96 overflow-y-auto">
+                {[
+                  {
+                    id: 1,
+                    customer: 'Sarah Johnson',
+                    platform: 'sms',
+                    message: '🚨 EMERGENCY! Need to cancel my Botox appointment tomorrow - family emergency! Please call me ASAP!',
+                    time: '2 min ago',
+                    priority: 'urgent',
+                    unread: true,
+                    avatar: 'SJ'
+                  },
+                  {
+                    id: 2,
+                    customer: '@emma_beauty_lover',
+                    platform: 'instagram',
+                    message: '💔 Something went wrong with my Juvederm! My lips are super swollen. Is this normal?? HELP!',
+                    time: '5 min ago',
+                    priority: 'urgent',
+                    unread: true,
+                    avatar: 'EB'
+                  },
+                  {
+                    id: 3,
+                    customer: 'Jennifer Kim',
+                    platform: 'email',
+                    message: 'URGENT: Allergic reaction to LATISSE! Experiencing severe redness and swelling. What should I do?',
+                    time: '12 min ago',
+                    priority: 'urgent',
+                    unread: true,
+                    avatar: 'JK'
+                  },
+                  {
+                    id: 4,
+                    customer: 'Maria Garcia',
+                    platform: 'facebook',
+                    message: 'Hi! I need to book an appointment ASAP. My wedding is this weekend and I need Botox touch-up!',
+                    time: '18 min ago',
+                    priority: 'high',
+                    unread: true,
+                    avatar: 'MG'
+                  }
+                ].map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`p-4 rounded-lg border-l-4 transition-all hover:shadow-md cursor-pointer ${
+                      msg.priority === 'urgent' 
+                        ? 'border-l-red-500 bg-red-50 hover:bg-red-100' 
+                        : 'border-l-orange-500 bg-orange-50 hover:bg-orange-100'
+                    }`}
+                  >
+                    <div className="flex items-start space-x-3">
+                      <div className={`relative flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${
+                        msg.platform === 'email' ? 'bg-blue-500' : 
+                        msg.platform === 'sms' ? 'bg-green-500' :
+                        msg.platform === 'instagram' ? 'bg-pink-500' :
+                        msg.platform === 'facebook' ? 'bg-blue-600' : 'bg-gray-500'
+                      }`}>
+                        {msg.avatar}
+                        {msg.unread && (
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+                            <div className="w-2 h-2 bg-white rounded-full"></div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <h4 className="font-bold text-gray-900">{msg.customer}</h4>
+                            <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                              msg.priority === 'urgent' 
+                                ? 'bg-red-500 text-white animate-pulse' 
+                                : 'bg-orange-500 text-white'
+                            }`}>
+                              {msg.priority === 'urgent' ? '🚨 URGENT' : '⚡ HIGH'}
+                            </span>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              msg.platform === 'email' ? 'bg-blue-100 text-blue-800' : 
+                              msg.platform === 'sms' ? 'bg-green-100 text-green-800' :
+                              msg.platform === 'instagram' ? 'bg-pink-100 text-pink-800' :
+                              msg.platform === 'facebook' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                            }`}>
+                              {msg.platform === 'email' ? '📧' : 
+                               msg.platform === 'sms' ? '💬' :
+                               msg.platform === 'instagram' ? '📱' :
+                               msg.platform === 'facebook' ? '📘' : '💬'} {msg.platform.toUpperCase()}
+                            </span>
+                          </div>
+                          <span className="text-xs text-gray-500 font-medium">{msg.time}</span>
+                        </div>
+                        <p className="text-sm text-gray-700 mt-2 font-medium">{msg.message}</p>
+                        
+                        {/* Quick Actions */}
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            ✅ Quick Reply
+                          </button>
+                          <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            📞 Call Now
+                          </button>
+                          <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                            📅 Emergency Appointment
+                          </button>
+                          {msg.priority === 'urgent' && (
+                            <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors">
+                              🚨 Escalate to Manager
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Quick Action Bar */}
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <div className="flex flex-wrap gap-3 justify-center">
+                  <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    🚨 Mark All Urgent Read
+                  </button>
+                  <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    💬 Bulk Reply Templates
+                  </button>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                    📊 Priority Analytics
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('messages')}
+                    className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center"
+                  >
+                    📬 View All Messages
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* AI Butler Alert */}
@@ -106,6 +273,17 @@ export default function CRMSystem() {
               >
                 <ChartBarIcon className="h-5 w-5" />
                 <span>Analytics</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('messages')}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                  activeTab === 'messages'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                }`}
+              >
+                <PaperAirplaneIcon className="h-5 w-5" />
+                <span>Messages</span>
               </button>
             </div>
           </div>
@@ -845,6 +1023,595 @@ export default function CRMSystem() {
                       </p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Messages & Communication Center */}
+          {activeTab === 'messages' && (
+            <div className="space-y-8">
+              
+              {/* Message Overview Dashboard */}
+              <div className="grid md:grid-cols-4 gap-6">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 shadow-lg border text-center transform hover:scale-105 transition-all">
+                  <CalendarDaysIcon className="h-10 w-10 mx-auto mb-3 opacity-90" />
+                  <div className="text-3xl font-bold mb-1">47</div>
+                  <div className="text-sm opacity-90">Appointment Requests</div>
+                  <div className="text-sm font-semibold mt-2 bg-white bg-opacity-20 rounded-full px-3 py-1">15 today</div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl p-6 shadow-lg border text-center transform hover:scale-105 transition-all">
+                  <ExclamationTriangleIcon className="h-10 w-10 mx-auto mb-3 opacity-90 animate-pulse" />
+                  <div className="text-3xl font-bold mb-1">8</div>
+                  <div className="text-sm opacity-90">Urgent Messages</div>
+                  <div className="text-sm font-semibold mt-2 bg-white bg-opacity-20 rounded-full px-3 py-1">Action needed</div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 shadow-lg border text-center transform hover:scale-105 transition-all">
+                  <ChatBubbleBottomCenterTextIcon className="h-10 w-10 mx-auto mb-3 opacity-90" />
+                  <div className="text-3xl font-bold mb-1">156</div>
+                  <div className="text-sm opacity-90">General Inquiries</div>
+                  <div className="text-sm font-semibold mt-2 bg-white bg-opacity-20 rounded-full px-3 py-1">+18% today</div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white rounded-xl p-6 shadow-lg border text-center transform hover:scale-105 transition-all">
+                  <StarIcon className="h-10 w-10 mx-auto mb-3 opacity-90" />
+                  <div className="text-3xl font-bold mb-1">23</div>
+                  <div className="text-sm opacity-90">Reviews & Feedback</div>
+                  <div className="text-sm font-semibold mt-2 bg-white bg-opacity-20 rounded-full px-3 py-1">4.8 ⭐ avg</div>
+                </div>
+              </div>
+
+              {/* Priority Message Categories */}
+              <div className="grid lg:grid-cols-2 gap-8">
+                
+                {/* Appointment Requests - Priority Section */}
+                <div className="bg-white rounded-xl shadow-xl border border-blue-200">
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-xl">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <CalendarDaysIcon className="h-7 w-7" />
+                        <h3 className="text-xl font-bold">📅 Appointment Requests</h3>
+                      </div>
+                      <span className="bg-white text-blue-700 px-4 py-2 rounded-full text-sm font-bold shadow-lg">47 pending</span>
+                    </div>
+                    <div className="mt-2 text-sm opacity-90">High priority booking requests requiring immediate attention</div>
+                  </div>
+                  
+                  <div className="p-6 max-h-96 overflow-y-auto bg-gradient-to-b from-blue-50 to-white">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          id: 1,
+                          customer: 'Sarah Johnson',
+                          type: 'New Appointment',
+                          treatment: 'Botox Treatment',
+                          message: 'Hi! I would like to book an appointment for a Botox treatment. Do you have availability next week? I prefer afternoons.',
+                          preferredDate: 'Next week afternoons',
+                          priority: 'high',
+                          platform: 'email',
+                          time: '15 min ago',
+                          isUrgent: false,
+                          phone: '+1 (555) 123-4567'
+                        },
+                        {
+                          id: 2,
+                          customer: 'Emma Rodriguez',
+                          type: 'URGENT Appointment',
+                          treatment: 'Juvederm Follow-up',
+                          message: '🚨 URGENT: My lips are very swollen after the Juvederm treatment. Can I come in today? I\'m quite concerned.',
+                          preferredDate: 'Today ASAP',
+                          priority: 'urgent',
+                          platform: 'sms',
+                          time: '5 min ago',
+                          isUrgent: true,
+                          phone: '+1 (555) 987-6543'
+                        },
+                        {
+                          id: 3,
+                          customer: 'Maria Garcia',
+                          type: 'Reschedule Request',
+                          treatment: 'LATISSE Consultation',
+                          message: 'Hi! I need to reschedule my appointment for tomorrow. Family emergency. When would be the next available slot?',
+                          preferredDate: 'Flexible',
+                          priority: 'medium',
+                          platform: 'instagram',
+                          time: '1 hour ago',
+                          isUrgent: false,
+                          phone: '+1 (555) 456-7890'
+                        },
+                        {
+                          id: 4,
+                          customer: 'Jennifer Kim',
+                          type: 'Follow-up Appointment',
+                          treatment: 'Botox Touch-up',
+                          message: 'Hello! It\'s time for my 3-month Botox touch-up. When do you have availability? I\'m flexible with timing.',
+                          preferredDate: 'This week',
+                          priority: 'medium',
+                          platform: 'email',
+                          time: '2 hours ago',
+                          isUrgent: false,
+                          phone: '+1 (555) 234-5678'
+                        },
+                        {
+                          id: 5,
+                          customer: 'Lisa Chen',
+                          type: 'Initial Consultation',
+                          treatment: 'Anti-Aging Consultation',
+                          message: 'I\'m 35 and interested in an anti-aging consultation. What treatments would you recommend? I\'m new to cosmetic procedures.',
+                          preferredDate: 'Next week',
+                          priority: 'low',
+                          platform: 'facebook',
+                          time: '3 hours ago',
+                          isUrgent: false,
+                          phone: '+1 (555) 345-6789'
+                        },
+                        {
+                          id: 6,
+                          customer: 'Michael Torres',
+                          type: 'Same Day Booking',
+                          treatment: 'Emergency Consultation',
+                          message: 'Do you have any cancellations today? I had a reaction to another clinic\'s treatment and need professional advice ASAP.',
+                          preferredDate: 'Today',
+                          priority: 'urgent',
+                          platform: 'phone',
+                          time: '45 min ago',
+                          isUrgent: true,
+                          phone: '+1 (555) 567-8901'
+                        }
+                      ].map((appointment) => (
+                        <div
+                          key={appointment.id}
+                          className={`p-5 rounded-xl border-l-4 transition-all hover:shadow-lg cursor-pointer transform hover:scale-[1.02] ${
+                            appointment.isUrgent 
+                              ? 'border-l-red-500 bg-gradient-to-r from-red-50 to-red-100 hover:from-red-100 hover:to-red-200 shadow-red-200' 
+                              : appointment.priority === 'high'
+                              ? 'border-l-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 shadow-blue-200'
+                              : 'border-l-indigo-300 bg-gradient-to-r from-gray-50 to-indigo-50 hover:from-indigo-50 hover:to-indigo-100'
+                          }`}
+                        >
+                          <div className="flex items-start space-x-4">
+                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+                              appointment.platform === 'email' ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 
+                              appointment.platform === 'sms' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                              appointment.platform === 'instagram' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                              appointment.platform === 'facebook' ? 'bg-gradient-to-r from-blue-600 to-blue-700' : 
+                              appointment.platform === 'phone' ? 'bg-gradient-to-r from-purple-500 to-purple-600' : 'bg-gray-500'
+                            }`}>
+                              {appointment.customer.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="font-bold text-gray-900 text-lg">{appointment.customer}</h4>
+                                  <div className="text-xs text-gray-600 font-medium">{appointment.phone}</div>
+                                </div>
+                                <span className="text-xs text-gray-500 bg-white px-3 py-1 rounded-full shadow">{appointment.time}</span>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${
+                                  appointment.isUrgent 
+                                    ? 'bg-red-500 text-white animate-pulse' 
+                                    : appointment.priority === 'high'
+                                    ? 'bg-blue-500 text-white'
+                                    : appointment.priority === 'medium'
+                                    ? 'bg-indigo-500 text-white'
+                                    : 'bg-gray-500 text-white'
+                                }`}>
+                                  {appointment.isUrgent ? '🚨 URGENT' : appointment.type}
+                                </span>
+                                <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium shadow-sm">
+                                  💉 {appointment.treatment}
+                                </span>
+                                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium shadow-sm">
+                                  📅 {appointment.preferredDate}
+                                </span>
+                              </div>
+                              
+                              <p className="text-sm text-gray-700 mb-4 leading-relaxed bg-white p-3 rounded-lg shadow-sm">{appointment.message}</p>
+                              
+                              <div className="flex flex-wrap gap-2">
+                                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  ✅ Confirm Appointment
+                                </button>
+                                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📞 Call Now
+                                </button>
+                                <button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📅 Open Calendar
+                                </button>
+                                {appointment.isUrgent && (
+                                  <button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md animate-pulse">
+                                    🚨 Emergency Slot
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Emergency & Urgent Messages */}
+                <div className="bg-white rounded-xl shadow-xl border border-red-200">
+                  <div className="bg-gradient-to-r from-red-600 to-pink-700 text-white p-6 rounded-t-xl">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <ExclamationTriangleIcon className="h-7 w-7 animate-pulse" />
+                        <h3 className="text-xl font-bold">🚨 Emergency & Urgent Messages</h3>
+                      </div>
+                      <span className="bg-white text-red-700 px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg">8 critical</span>
+                    </div>
+                    <div className="mt-2 text-sm opacity-90">Critical issues requiring immediate medical attention</div>
+                  </div>
+                  
+                  <div className="p-6 max-h-96 overflow-y-auto bg-gradient-to-b from-red-50 to-white">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          id: 1,
+                          customer: 'Anna Schmidt',
+                          type: 'Allergic Reaction',
+                          message: 'HELP! I\'m having an allergic reaction to LATISSE. My eyes are red and swollen. What should I do?',
+                          platform: 'sms',
+                          time: '2 min ago',
+                          severity: 'critical',
+                          phone: '+1 (555) 911-1234'
+                        },
+                        {
+                          id: 2,
+                          customer: 'David Miller',
+                          type: 'Post-Treatment Complication',
+                          message: 'After yesterday\'s Botox treatment I have severe headaches and nausea. Is this normal? I\'m very concerned.',
+                          platform: 'email',
+                          time: '8 min ago',
+                          severity: 'high',
+                          phone: '+1 (555) 222-3456'
+                        },
+                        {
+                          id: 3,
+                          customer: '@beauty_queen_2024',
+                          type: 'Persistent Side Effect',
+                          message: 'My Juvederm treatment was 3 days ago and I still have severe pain and unusual swelling. Can you help?',
+                          platform: 'instagram',
+                          time: '20 min ago',
+                          severity: 'high',
+                          phone: '+1 (555) 333-4567'
+                        },
+                        {
+                          id: 4,
+                          customer: 'Patricia Wong',
+                          type: 'Emergency Consultation',
+                          message: 'I had a Botox treatment at another clinic yesterday and my face is completely numb. I need help ASAP!',
+                          platform: 'phone',
+                          time: '35 min ago',
+                          severity: 'critical',
+                          phone: '+1 (555) 444-5678'
+                        }
+                      ].map((emergency) => (
+                        <div
+                          key={emergency.id}
+                          className={`p-5 rounded-xl border-l-4 transition-all hover:shadow-lg cursor-pointer transform hover:scale-[1.02] ${
+                            emergency.severity === 'critical' 
+                              ? 'border-l-red-600 bg-gradient-to-r from-red-100 to-red-200 hover:from-red-200 hover:to-red-300 animate-pulse shadow-red-300' 
+                              : 'border-l-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 shadow-orange-200'
+                          }`}
+                        >
+                          <div className="flex items-start space-x-4">
+                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+                              emergency.severity === 'critical' 
+                                ? 'bg-gradient-to-r from-red-600 to-red-700 animate-pulse' 
+                                : 'bg-gradient-to-r from-orange-500 to-orange-600'
+                            }`}>
+                              {emergency.customer.startsWith('@') 
+                                ? emergency.customer.substring(1, 3).toUpperCase()
+                                : emergency.customer.split(' ').map(n => n[0]).join('')
+                              }
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="font-bold text-gray-900 text-lg">{emergency.customer}</h4>
+                                  <div className="text-xs text-gray-600 font-medium">{emergency.phone}</div>
+                                </div>
+                                <span className="text-xs text-gray-500 bg-white px-3 py-1 rounded-full shadow">{emergency.time}</span>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                <span className={`px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm ${
+                                  emergency.severity === 'critical' 
+                                    ? 'bg-red-600 animate-pulse' 
+                                    : 'bg-orange-500'
+                                }`}>
+                                  {emergency.severity === 'critical' ? '🚨 CRITICAL' : '⚠️ URGENT'}
+                                </span>
+                                <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium shadow-sm">
+                                  🏥 {emergency.type}
+                                </span>
+                              </div>
+                              
+                              <p className="text-sm text-gray-700 mb-4 font-medium leading-relaxed bg-white p-3 rounded-lg shadow-sm border border-red-100">{emergency.message}</p>
+                              
+                              <div className="flex flex-wrap gap-2">
+                                <button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md animate-pulse">
+                                  🚨 Call Immediately
+                                </button>
+                                <button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md">
+                                  👨‍⚕️ Doctor Consult
+                                </button>
+                                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md">
+                                  📋 Create Report
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* General Inquiries & Reviews */}
+              <div className="grid lg:grid-cols-2 gap-8">
+                
+                {/* General Inquiries */}
+                <div className="bg-white rounded-xl shadow-xl border border-green-200">
+                  <div className="bg-gradient-to-r from-green-600 to-teal-700 text-white p-6 rounded-t-xl">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <ChatBubbleBottomCenterTextIcon className="h-7 w-7" />
+                        <h3 className="text-xl font-bold">💬 General Inquiries</h3>
+                      </div>
+                      <span className="bg-white text-green-700 px-4 py-2 rounded-full text-sm font-bold shadow-lg">156 active</span>
+                    </div>
+                    <div className="mt-2 text-sm opacity-90">Customer questions and consultation requests</div>
+                  </div>
+                  
+                  <div className="p-6 max-h-96 overflow-y-auto bg-gradient-to-b from-green-50 to-white">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          id: 1,
+                          customer: 'Sophie Wagner',
+                          type: 'Consultation Request',
+                          message: 'Hello! I\'m 28 and interested in preventive anti-aging treatments. What would you recommend for someone my age?',
+                          platform: 'email',
+                          time: '45 min ago',
+                          phone: '+1 (555) 123-9876'
+                        },
+                        {
+                          id: 2,
+                          customer: '@skincare_enthusiast',
+                          type: 'Product Question',
+                          message: 'How long does it take for LATISSE to work? I\'ve been using it for 3 weeks and don\'t see any changes yet.',
+                          platform: 'instagram',
+                          time: '1 hour ago',
+                          phone: '+1 (555) 234-8765'
+                        },
+                        {
+                          id: 3,
+                          customer: 'Michael Brown',
+                          type: 'Pricing Inquiry',
+                          message: 'Could you please send me the pricing for Botox and Juvederm treatments? Do you offer any package deals?',
+                          platform: 'facebook',
+                          time: '2 hours ago',
+                          phone: '+1 (555) 345-7654'
+                        },
+                        {
+                          id: 4,
+                          customer: 'Amanda Taylor',
+                          type: 'Treatment Comparison',
+                          message: 'I\'m trying to decide between Botox and Dysport. What are the main differences? Which would be better for forehead lines?',
+                          platform: 'email',
+                          time: '3 hours ago',
+                          phone: '+1 (555) 456-6543'
+                        }
+                      ].map((inquiry) => (
+                        <div
+                          key={inquiry.id}
+                          className="p-5 rounded-xl border border-green-200 hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02] bg-gradient-to-r from-green-50 to-teal-50 hover:from-green-100 hover:to-teal-100"
+                        >
+                          <div className="flex items-start space-x-4">
+                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+                              inquiry.platform === 'email' ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 
+                              inquiry.platform === 'instagram' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                              'bg-gradient-to-r from-blue-600 to-blue-700'
+                            }`}>
+                              {inquiry.customer.startsWith('@') 
+                                ? inquiry.customer.substring(1, 3).toUpperCase()
+                                : inquiry.customer.split(' ').map(n => n[0]).join('')
+                              }
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="font-bold text-gray-900 text-lg">{inquiry.customer}</h4>
+                                  <div className="text-xs text-gray-600 font-medium">{inquiry.phone}</div>
+                                </div>
+                                <span className="text-xs text-gray-500 bg-white px-3 py-1 rounded-full shadow">{inquiry.time}</span>
+                              </div>
+                              
+                              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium mb-3 inline-block shadow-sm">
+                                💬 {inquiry.type}
+                              </span>
+                              
+                              <p className="text-sm text-gray-700 mb-4 leading-relaxed bg-white p-3 rounded-lg shadow-sm">{inquiry.message}</p>
+                              
+                              <div className="flex gap-2">
+                                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  ✅ Reply Now
+                                </button>
+                                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📞 Call
+                                </button>
+                                <button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📅 Schedule
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reviews & Feedback */}
+                <div className="bg-white rounded-xl shadow-xl border border-yellow-200">
+                  <div className="bg-gradient-to-r from-yellow-600 to-orange-700 text-white p-6 rounded-t-xl">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <StarIcon className="h-7 w-7" />
+                        <h3 className="text-xl font-bold">⭐ Reviews & Feedback</h3>
+                      </div>
+                      <span className="bg-white text-yellow-700 px-4 py-2 rounded-full text-sm font-bold shadow-lg">4.8 ⭐</span>
+                    </div>
+                    <div className="mt-2 text-sm opacity-90">Customer testimonials and treatment reviews</div>
+                  </div>
+                  
+                  <div className="p-6 max-h-96 overflow-y-auto bg-gradient-to-b from-yellow-50 to-white">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          id: 1,
+                          customer: 'Laura Mitchell',
+                          rating: 5,
+                          message: '⭐⭐⭐⭐⭐ Fantastic Botox treatment! The results are perfect and very natural. Thank you so much!',
+                          platform: 'google',
+                          time: '25 min ago',
+                          phone: '+1 (555) 678-9012'
+                        },
+                        {
+                          id: 2,
+                          customer: '@happy_customer_2024',
+                          rating: 5,
+                          message: 'Best LATISSE consultation ever! My lashes are now so long and thick. Absolutely recommend! 💕',
+                          platform: 'instagram',
+                          time: '1 hour ago',
+                          phone: '+1 (555) 789-0123'
+                        },
+                        {
+                          id: 3,
+                          customer: 'Robert Johnson',
+                          rating: 4,
+                          message: 'Very professional Juvederm treatment. Minor swelling was gone after 2 days. Will come back!',
+                          platform: 'facebook',
+                          time: '2 hours ago',
+                          phone: '+1 (555) 890-1234'
+                        },
+                        {
+                          id: 4,
+                          customer: 'Catherine Lee',
+                          rating: 5,
+                          message: 'Amazing results from my anti-aging consultation! The staff is so knowledgeable and caring. 5 stars!',
+                          platform: 'google',
+                          time: '4 hours ago',
+                          phone: '+1 (555) 901-2345'
+                        }
+                      ].map((review) => (
+                        <div
+                          key={review.id}
+                          className="p-5 rounded-xl border border-yellow-200 hover:shadow-lg transition-all cursor-pointer bg-gradient-to-r from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100 transform hover:scale-[1.02]"
+                        >
+                          <div className="flex items-start space-x-4">
+                            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                              {review.customer.startsWith('@') 
+                                ? review.customer.substring(1, 3).toUpperCase()
+                                : review.customer.split(' ').map(n => n[0]).join('')
+                              }
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="font-bold text-gray-900 text-lg">{review.customer}</h4>
+                                  <div className="text-xs text-gray-600 font-medium">{review.phone}</div>
+                                </div>
+                                <span className="text-xs text-gray-500 bg-white px-3 py-1 rounded-full shadow">{review.time}</span>
+                              </div>
+                              
+                              <div className="flex items-center gap-2 mb-3">
+                                <div className="flex">
+                                  {[...Array(5)].map((_, i) => (
+                                    <StarIcon
+                                      key={i}
+                                      className={`h-5 w-5 ${
+                                        i < review.rating ? 'text-yellow-400' : 'text-gray-300'
+                                      }`}
+                                    />
+                                  ))}
+                                </div>
+                                <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium shadow-sm">
+                                  📍 {review.platform}
+                                </span>
+                              </div>
+                              
+                              <p className="text-sm text-gray-700 mb-4 leading-relaxed bg-white p-3 rounded-lg shadow-sm">{review.message}</p>
+                              
+                              <div className="flex gap-2">
+                                <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  💖 Thank Customer
+                                </button>
+                                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📤 Share Review
+                                </button>
+                                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-md transform hover:scale-105 transition-all">
+                                  📞 Follow Up
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Actions Hub */}
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl shadow-xl border border-blue-200 p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                  <span className="text-2xl mr-3">⚡</span>
+                  Quick Actions Hub
+                </h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-6 rounded-xl text-left transition-all transform hover:scale-105 shadow-lg">
+                    <div className="flex items-center space-x-4">
+                      <CalendarDaysIcon className="h-10 w-10 opacity-90" />
+                      <div>
+                        <div className="font-bold text-lg">📅 Open Calendar</div>
+                        <div className="text-sm opacity-90">View available appointments</div>
+                      </div>
+                    </div>
+                  </button>
+                  
+                  <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-6 rounded-xl text-left transition-all transform hover:scale-105 shadow-lg">
+                    <div className="flex items-center space-x-4">
+                      <DocumentTextIcon className="h-10 w-10 opacity-90" />
+                      <div>
+                        <div className="font-bold text-lg">📝 Message Templates</div>
+                        <div className="text-sm opacity-90">Pre-written responses</div>
+                      </div>
+                    </div>
+                  </button>
+                  
+                  <button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-6 rounded-xl text-left transition-all transform hover:scale-105 shadow-lg">
+                    <div className="flex items-center space-x-4">
+                      <ChartBarIcon className="h-10 w-10 opacity-90" />
+                      <div>
+                        <div className="font-bold text-lg">📊 Message Analytics</div>
+                        <div className="text-sm opacity-90">View performance stats</div>
+                      </div>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
