@@ -1,9 +1,7 @@
 {
-  "/services/page": "app/services/page.js",
   "/blog/page": "app/blog/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/page": "app/page.js",
-  "/booking/page": "app/booking/page.js",
-  "/shop/page": "app/shop/page.js",
-  "/crm/page": "app/crm/page.js"
+  "/crm/page": "app/crm/page.js",
+  "/shop/page": "app/shop/page.js"
 }

@@ -62,15 +62,15 @@ export default function BusinessDashboard() {
   // Business KPIs
   const kpis: KPI[] = [
     {
-      title: 'Monatsumsatz',
-      value: '€187,420',
+      title: 'Monthly Revenue',
+      value: '$187,420',
       change: 18.2,
       trend: 'up',
       icon: CurrencyDollarIcon,
       color: 'green'
     },
     {
-      title: 'Neue Kunden',
+      title: 'New Customers',
       value: 156,
       change: 12.5,
       trend: 'up',
@@ -78,7 +78,7 @@ export default function BusinessDashboard() {
       color: 'blue'
     },
     {
-      title: 'Behandlungen',
+      title: 'Treatments',
       value: 847,
       change: 8.3,
       trend: 'up',
@@ -86,7 +86,7 @@ export default function BusinessDashboard() {
       color: 'purple'
     },
     {
-      title: 'Kundenzufriedenheit',
+      title: 'Customer Satisfaction',
       value: '4.8/5',
       change: 2.1,
       trend: 'up',
@@ -94,7 +94,7 @@ export default function BusinessDashboard() {
       color: 'yellow'
     },
     {
-      title: 'Wiederkehrende Kunden',
+      title: 'Returning Customers',
       value: '78%',
       change: 5.2,
       trend: 'up',
@@ -102,8 +102,8 @@ export default function BusinessDashboard() {
       color: 'indigo'
     },
     {
-      title: 'Durchschnittlicher Auftragswert',
-      value: '€420',
+      title: 'Average Order Value',
+      value: '$420',
       change: -3.1,
       trend: 'down',
       icon: BanknotesIcon,
@@ -111,17 +111,17 @@ export default function BusinessDashboard() {
     }
   ]
 
-  // Revenue Data für die letzten 6 Monate
+  // Revenue Data for the last 6 months
   const revenueData: RevenueData[] = [
     { month: 'Aug', revenue: 142000, treatments: 620, newCustomers: 95 },
     { month: 'Sep', revenue: 158000, treatments: 710, newCustomers: 108 },
-    { month: 'Okt', revenue: 173000, treatments: 780, newCustomers: 134 },
+    { month: 'Oct', revenue: 173000, treatments: 780, newCustomers: 134 },
     { month: 'Nov', revenue: 169000, treatments: 751, newCustomers: 142 },
-    { month: 'Dez', revenue: 195000, treatments: 890, newCustomers: 187 },
+    { month: 'Dec', revenue: 195000, treatments: 890, newCustomers: 187 },
     { month: 'Jan', revenue: 187420, treatments: 847, newCustomers: 156 }
   ]
 
-  // Top Behandlungen
+  // Top Treatments
   const topTreatments: TopTreatment[] = [
     { name: 'Botox Premium', revenue: 47280, count: 112, growth: 15.3 },
     { name: 'Juvéderm Luxury', revenue: 41850, count: 87, growth: 22.1 },
@@ -168,7 +168,7 @@ export default function BusinessDashboard() {
       {/* Revenue Chart */}
       <div className="bg-white rounded-xl shadow-lg border p-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold text-gray-900">Umsatzentwicklung</h3>
+          <h3 className="text-xl font-bold text-gray-900">Revenue Development</h3>
           <div className="flex space-x-2">
             <button
               onClick={() => setDateRange('7')}
@@ -209,13 +209,13 @@ export default function BusinessDashboard() {
                     style={{ width: `${(data.revenue / 200000) * 100}%` }}
                   >
                     <span className="text-white text-xs font-medium">
-                      €{(data.revenue / 1000).toFixed(0)}k
+                      ${(data.revenue / 1000).toFixed(0)}k
                     </span>
                   </div>
                 </div>
               </div>
               <div className="text-sm text-gray-600">
-                {data.treatments} Behandlungen
+                {data.treatments} Treatments
               </div>
             </div>
           ))}
@@ -225,16 +225,16 @@ export default function BusinessDashboard() {
       {/* Top Treatments */}
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow-lg border p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-6">Top Behandlungen</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Top Treatments</h3>
           <div className="space-y-4">
             {topTreatments.map((treatment, index) => (
               <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                 <div>
                   <h4 className="font-medium text-gray-900">{treatment.name}</h4>
-                  <p className="text-sm text-gray-600">{treatment.count} Behandlungen</p>
+                  <p className="text-sm text-gray-600">{treatment.count} Treatments</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-gray-900">€{treatment.revenue.toLocaleString()}</p>
+                  <p className="font-bold text-gray-900">${treatment.revenue.toLocaleString()}</p>
                   <p className="text-sm text-green-600">+{treatment.growth}%</p>
                 </div>
               </div>
@@ -244,52 +244,52 @@ export default function BusinessDashboard() {
 
         {/* Quick Stats */}
         <div className="bg-white rounded-xl shadow-lg border p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-6">Schnelle Statistiken</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Quick Statistics</h3>
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <CalendarDaysIcon className="h-5 w-5 text-blue-600" />
-                <span className="text-gray-700">Heute geplant</span>
+                <span className="text-gray-700">Scheduled Today</span>
               </div>
-              <span className="font-bold text-gray-900">23 Termine</span>
+              <span className="font-bold text-gray-900">23 Appointments</span>
             </div>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <ClockIcon className="h-5 w-5 text-orange-600" />
-                <span className="text-gray-700">Warteliste</span>
+                <span className="text-gray-700">Waitlist</span>
               </div>
-              <span className="font-bold text-gray-900">47 Personen</span>
+              <span className="font-bold text-gray-900">47 People</span>
             </div>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <ExclamationTriangleIcon className="h-5 w-5 text-red-600" />
-                <span className="text-gray-700">Nachfassen erforderlich</span>
+                <span className="text-gray-700">Follow-up Required</span>
               </div>
-              <span className="font-bold text-gray-900">8 Kunden</span>
+              <span className="font-bold text-gray-900">8 Customers</span>
             </div>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <CheckCircleIcon className="h-5 w-5 text-green-600" />
-                <span className="text-gray-700">Zufriedenheitsziel</span>
+                <span className="text-gray-700">Satisfaction Goal</span>
               </div>
-              <span className="font-bold text-green-600">96% erreicht</span>
+              <span className="font-bold text-green-600">96% Reached</span>
             </div>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <TrophyIcon className="h-5 w-5 text-purple-600" />
-                <span className="text-gray-700">VIP Kunden</span>
+                <span className="text-gray-700">VIP Customers</span>
               </div>
-              <span className="font-bold text-gray-900">234 aktiv</span>
+              <span className="font-bold text-gray-900">234 Active</span>
             </div>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <HeartIcon className="h-5 w-5 text-pink-600" />
-                <span className="text-gray-700">Empfehlungsrate</span>
+                <span className="text-gray-700">Referral Rate</span>
               </div>
               <span className="font-bold text-gray-900">89%</span>
             </div>
@@ -302,23 +302,23 @@ export default function BusinessDashboard() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div className="bg-white rounded-xl shadow-lg border p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Detaillierte Analytics</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Detailed Analytics</h3>
         
         {/* Marketing Channels */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Marketing-Kanäle</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">Marketing Channels</h4>
             <div className="space-y-4">
               {[
-                { channel: 'Instagram Ads', customers: 78, percentage: 45, cost: '€2,340' },
-                { channel: 'Google Ads', customers: 52, percentage: 30, cost: '€1,890' },
-                { channel: 'Empfehlungen', customers: 28, percentage: 16, cost: '€0' },
-                { channel: 'Facebook Ads', customers: 15, percentage: 9, cost: '€780' }
+                { channel: 'Instagram Ads', customers: 78, percentage: 45, cost: '$2,340' },
+                { channel: 'Google Ads', customers: 52, percentage: 30, cost: '$1,890' },
+                { channel: 'Referrals', customers: 28, percentage: 16, cost: '$0' },
+                { channel: 'Facebook Ads', customers: 15, percentage: 9, cost: '$780' }
               ].map((item, index) => (
                 <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
                     <p className="font-medium text-gray-900">{item.channel}</p>
-                    <p className="text-sm text-gray-600">{item.customers} neue Kunden</p>
+                    <p className="text-sm text-gray-600">{item.customers} new customers</p>
                   </div>
                   <div className="text-right">
                     <p className="font-bold text-gray-900">{item.percentage}%</p>
@@ -331,17 +331,17 @@ export default function BusinessDashboard() {
 
           {/* Customer Demographics */}
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Kundendemografie</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">Customer Demographics</h4>
             <div className="space-y-4">
               {[
-                { age: '25-35', percentage: 42, gender: '89% Frauen' },
-                { age: '36-45', percentage: 35, gender: '91% Frauen' },
-                { age: '46-55', percentage: 18, gender: '94% Frauen' },
-                { age: '18-24', percentage: 5, gender: '95% Frauen' }
+                { age: '25-35', percentage: 42, gender: '89% Female' },
+                { age: '36-45', percentage: 35, gender: '91% Female' },
+                { age: '46-55', percentage: 18, gender: '94% Female' },
+                { age: '18-24', percentage: 5, gender: '95% Female' }
               ].map((item, index) => (
                 <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">{item.age} Jahre</p>
+                    <p className="font-medium text-gray-900">{item.age} years</p>
                     <p className="text-sm text-gray-600">{item.gender}</p>
                   </div>
                   <div className="text-right">
@@ -363,15 +363,15 @@ export default function BusinessDashboard() {
         <div className="bg-white rounded-xl shadow-lg border p-6">
           <div className="flex items-center space-x-3 mb-4">
             <ClockIcon className="h-6 w-6 text-blue-600" />
-            <h3 className="text-lg font-semibold text-gray-900">Effizienz</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Efficiency</h3>
           </div>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Durchschnittliche Behandlungszeit</span>
+              <span className="text-gray-600">Average Treatment Time</span>
               <span className="font-medium">47 min</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Auslastung</span>
+              <span className="text-gray-600">Capacity</span>
               <span className="font-medium text-green-600">87%</span>
             </div>
             <div className="flex justify-between">
@@ -388,15 +388,15 @@ export default function BusinessDashboard() {
           </div>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Aktive Behandler</span>
+              <span className="text-gray-600">Active Practitioners</span>
               <span className="font-medium">5</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Durchschnittliche Bewertung</span>
+              <span className="text-gray-600">Average Rating</span>
               <span className="font-medium text-yellow-600">4.9/5</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Personalauslastung</span>
+              <span className="text-gray-600">Staff Utilization</span>
               <span className="font-medium text-green-600">92%</span>
             </div>
           </div>
@@ -405,19 +405,19 @@ export default function BusinessDashboard() {
         <div className="bg-white rounded-xl shadow-lg border p-6">
           <div className="flex items-center space-x-3 mb-4">
             <BanknotesIcon className="h-6 w-6 text-purple-600" />
-            <h3 className="text-lg font-semibold text-gray-900">Finanzen</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Finance</h3>
           </div>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Gewinnmarge</span>
+              <span className="text-gray-600">Profit Margin</span>
               <span className="font-medium text-green-600">68%</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Betriebskosten</span>
-              <span className="font-medium">€59,840</span>
+              <span className="text-gray-600">Operating Costs</span>
+              <span className="font-medium">$59,840</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">ROI Marketing</span>
+              <span className="text-gray-600">Marketing ROI</span>
               <span className="font-medium text-green-600">340%</span>
             </div>
           </div>
@@ -426,13 +426,13 @@ export default function BusinessDashboard() {
 
       {/* Live Aktivitäten */}
       <div className="bg-white rounded-xl shadow-lg border p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Live Aktivitäten</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Live Activities</h3>
         <div className="space-y-4">
           {[
-            { time: '14:23', event: 'Neue Buchung: Botox Premium - Sarah Johnson', type: 'booking' },
-            { time: '14:18', event: 'Behandlung abgeschlossen: HydraFacial - Emma Wilson', type: 'completed' },
-            { time: '14:12', event: 'Bewertung erhalten: 5⭐ von Maria Garcia', type: 'review' },
-            { time: '14:05', event: 'Zahlung eingegangen: €420 - Jennifer Kim', type: 'payment' },
+            { time: '14:23', event: 'New Booking: Botox Premium - Sarah Johnson', type: 'booking' },
+            { time: '14:18', event: 'Treatment Completed: HydraFacial - Emma Wilson', type: 'completed' },
+            { time: '14:12', event: 'Review Received: 5⭐ from Maria Garcia', type: 'review' },
+            { time: '14:05', event: 'Payment Received: $420 - Jennifer Kim', type: 'payment' },
             { time: '13:58', event: 'VIP Upgrade: Lisa Chen → Platinum Status', type: 'upgrade' }
           ].map((activity, index) => (
             <div key={index} className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
@@ -471,7 +471,7 @@ export default function BusinessDashboard() {
               <h1 className="text-4xl font-light text-gray-900">Business Intelligence Dashboard</h1>
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Echtzeit-KPIs und umfassende Geschäftsanalysen für LA Skin Laboratories
+              Real-time KPIs and comprehensive business analytics for LA Skin Laboratories
             </p>
           </div>
 
@@ -487,7 +487,7 @@ export default function BusinessDashboard() {
                 }`}
               >
                 <ChartBarIcon className="h-5 w-5" />
-                <span>Übersicht</span>
+                <span>Overview</span>
               </button>
               <button
                 onClick={() => setActiveTab('analytics')}

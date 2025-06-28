@@ -26,7 +26,7 @@ export default function ChatWidget() {
     {
       id: 1,
       sender: 'agent',
-      text: 'Hallo! Willkommen bei LA Skin Laboratories. Ich bin Maria, Ihre persönliche Beauty-Beraterin. Wie kann ich Ihnen heute helfen?',
+      text: 'Hello! Welcome to LA Skin Laboratories. I\'m Maria, your personal beauty consultant. How can I help you today?',
       timestamp: new Date(),
       agentName: 'Maria Rodriguez',
       agentAvatar: 'MR'
@@ -55,23 +55,23 @@ export default function ChatWidget() {
       const lowerMessage = userMessage.toLowerCase()
       
       if (lowerMessage.includes('botox') || lowerMessage.includes('anti-aging')) {
-        response = 'Botox® ist eine unserer beliebtesten Behandlungen! Wir bieten Premium-Botox-Behandlungen ab $480. Möchten Sie einen Beratungstermin vereinbaren?'
+        response = 'Botox® is one of our most popular treatments! We offer Premium Botox treatments starting at $480. Would you like to schedule a consultation?'
       } else if (lowerMessage.includes('juvederm') || lowerMessage.includes('filler')) {
-        response = 'Juvéderm® ist perfekt für natürliche Volumen-Ergebnisse. Unsere Luxury-Behandlung kostet $650. Soll ich Ihnen unsere Standorte zeigen?'
-      } else if (lowerMessage.includes('latisse') || lowerMessage.includes('wimpern')) {
-        response = 'LATISSE® ist FDA-zugelassen für längere, vollere Wimpern. Die Behandlung kostet $180. Wann hätten Sie Zeit für eine Beratung?'
-      } else if (lowerMessage.includes('produkt') || lowerMessage.includes('serum') || lowerMessage.includes('creme')) {
-        response = 'Wir haben über 20 authentische LA Skin Labs-Produkte. Welche Hautprobleme möchten Sie angehen? Akne, Anti-Aging oder Pigmentierung?'
-      } else if (lowerMessage.includes('termin') || lowerMessage.includes('appointment')) {
-        response = 'Gerne vereinbare ich einen Termin für Sie! Wir haben Standorte in Beverly Hills, Hollywood, Santa Monica und West Hollywood. Welcher wäre am besten für Sie?'
-      } else if (lowerMessage.includes('preis') || lowerMessage.includes('kosten') || lowerMessage.includes('price')) {
-        response = 'Unsere Preise beginnen bei:\n• LATISSE® Treatment: $180\n• Clarisonic Luxury: $150\n• Botox® Premium: $480\n• Juvéderm® Luxury: $650\n\nMöchten Sie Details zu einer bestimmten Behandlung?'
-      } else if (lowerMessage.includes('standort') || lowerMessage.includes('location') || lowerMessage.includes('wo')) {
-        response = 'Wir haben 4 Premium-Standorte:\n• Beverly Hills - Rodeo Drive\n• Hollywood - Sunset Boulevard\n• Santa Monica - 3rd Street\n• West Hollywood - Melrose Avenue\n\nWelcher ist für Sie am bequemsten?'
-      } else if (lowerMessage.includes('öffnungszeiten') || lowerMessage.includes('hours')) {
-        response = 'Unsere Öffnungszeiten:\n• Mo-Fr: 9:00-19:00\n• Sa: 9:00-17:00\n• So: 11:00-16:00\n\nMöchten Sie einen Termin vereinbaren?'
+        response = 'Juvéderm® is perfect for natural volume results. Our Luxury treatment costs $650. Would you like me to show you our locations?'
+      } else if (lowerMessage.includes('latisse') || lowerMessage.includes('lashes')) {
+        response = 'LATISSE® is FDA-approved for longer, fuller lashes. The treatment costs $180. When would you have time for a consultation?'
+      } else if (lowerMessage.includes('product') || lowerMessage.includes('serum') || lowerMessage.includes('cream')) {
+        response = 'We have over 20 authentic LA Skin Labs products. Which skin concerns would you like to address? Acne, Anti-Aging, or Pigmentation?'
+      } else if (lowerMessage.includes('appointment') || lowerMessage.includes('booking')) {
+        response = 'I\'d be happy to schedule an appointment for you! We have locations in Beverly Hills, Hollywood, Santa Monica, and West Hollywood. Which would be best for you?'
+      } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+        response = 'Our prices start at:\n• LATISSE® Treatment: $180\n• Clarisonic Luxury: $150\n• Botox® Premium: $480\n• Juvéderm® Luxury: $650\n\nWould you like details about a specific treatment?'
+      } else if (lowerMessage.includes('location') || lowerMessage.includes('where')) {
+        response = 'We have 4 Premium locations:\n• Beverly Hills - Rodeo Drive\n• Hollywood - Sunset Boulevard\n• Santa Monica - 3rd Street\n• West Hollywood - Melrose Avenue\n\nWhich is most convenient for you?'
+      } else if (lowerMessage.includes('hours') || lowerMessage.includes('open')) {
+        response = 'Our hours:\n• Mon-Fri: 9:00 AM - 7:00 PM\n• Sat: 9:00 AM - 5:00 PM\n• Sun: 11:00 AM - 4:00 PM\n\nWould you like to schedule an appointment?'
       } else {
-        response = 'Vielen Dank für Ihre Nachricht! Ich kann Ihnen bei Fragen zu unseren Behandlungen (Botox®, Juvéderm®, LATISSE®) und Produkten helfen. Oder möchten Sie direkt einen Beratungstermin vereinbaren?'
+        response = 'Thank you for your message! I can help you with questions about our treatments (Botox®, Juvéderm®, LATISSE®) and products. Or would you like to schedule a consultation directly?'
       }
       
       setMessages(prev => [...prev, {
@@ -104,9 +104,9 @@ export default function ChatWidget() {
   }
 
   const quickActions = [
-    { text: 'Termin vereinbaren', icon: CalendarDaysIcon },
-    { text: 'Preise anfragen', icon: StarIcon },
-    { text: 'Anrufen', icon: PhoneIcon }
+    { text: 'Book Appointment', icon: CalendarDaysIcon },
+    { text: 'Request Prices', icon: StarIcon },
+    { text: 'Call Us', icon: PhoneIcon }
   ]
 
   return (

@@ -113,12 +113,12 @@ export default function AIMarketingHub() {
 
   // Content Tones
   const contentTones = [
-    { id: 'luxurious', name: 'Luxuriös & Elegant', emoji: '✨', description: 'Exklusiv und hochwertig' },
-    { id: 'friendly', name: 'Freundlich & Warm', emoji: '😊', description: 'Einladend und persönlich' },
-    { id: 'professional', name: 'Professionell', emoji: '👔', description: 'Seriös und vertrauenswürdig' },
-    { id: 'trendy', name: 'Trendy & Modern', emoji: '🔥', description: 'Aktuell und angesagt' },
-    { id: 'educational', name: 'Informativ', emoji: '📚', description: 'Lehrreich und wertvoll' },
-    { id: 'promotional', name: 'Werblich', emoji: '🎯', description: 'Verkaufsorientiert' }
+    { id: 'luxurious', name: 'Luxurious & Elegant', emoji: '✨', description: 'Exclusive and premium' },
+    { id: 'friendly', name: 'Friendly & Warm', emoji: '😊', description: 'Inviting and personal' },
+    { id: 'professional', name: 'Professional', emoji: '👔', description: 'Serious and trustworthy' },
+    { id: 'trendy', name: 'Trendy & Modern', emoji: '🔥', description: 'Current and trending' },
+    { id: 'educational', name: 'Educational', emoji: '📚', description: 'Informative and valuable' },
+    { id: 'promotional', name: 'Promotional', emoji: '🎯', description: 'Sales-oriented' }
   ]
 
   // Languages
@@ -341,14 +341,14 @@ export default function AIMarketingHub() {
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      🎯 Content-Beschreibung
+                      🎯 Content Description
                     </label>
                     <textarea
                       value={contentPrompt}
                       onChange={(e) => setContentPrompt(e.target.value)}
                       className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/80 backdrop-blur-sm"
                       rows={4}
-                      placeholder="Beschreibe deinen gewünschten Content... z.B. 'Luxuriöse Botox-Behandlung mit eleganter Atmosphäre, zeige Vorher-Nachher Transformation'"
+                      placeholder="Describe your desired content... e.g. 'Luxurious Botox treatment with elegant atmosphere, show before-after transformation'"
                     />
                   </div>
                   
@@ -356,7 +356,7 @@ export default function AIMarketingHub() {
                     {/* Tone Selection */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-3">
-                        🎭 Content-Ton
+                        🎭 Content Tone
                       </label>
                       <div className="grid grid-cols-2 gap-3">
                         {contentTones.map((tone) => (
@@ -415,12 +415,12 @@ export default function AIMarketingHub() {
                       {isGenerating ? (
                         <>
                           <CpuChipIcon className="h-6 w-6 animate-spin" />
-                          <span>KI arbeitet magisch...</span>
+                          <span>AI working magically...</span>
                         </>
                       ) : (
                         <>
                           <SparklesIcon className="h-6 w-6 group-hover:animate-pulse" />
-                          <span>Content mit KI erstellen</span>
+                          <span>Create Content with AI</span>
                         </>
                       )}
                     </div>
@@ -442,20 +442,20 @@ export default function AIMarketingHub() {
                   <div className="mt-6 bg-purple-50 rounded-2xl p-6">
                     <div className="flex items-center space-x-3 mb-4">
                       <CpuChipIcon className="h-6 w-6 text-purple-600 animate-pulse" />
-                      <span className="text-purple-800 font-semibold">KI generiert Ihren Content...</span>
+                      <span className="text-purple-800 font-semibold">AI is generating your content...</span>
                     </div>
                     <div className="space-y-2 text-sm text-purple-700">
                       <div className="flex items-center space-x-2">
                         <CheckCircleIcon className="h-4 w-4" />
-                        <span>Analysiere Content-Anfrage</span>
+                        <span>Analyzing content request</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <CheckCircleIcon className="h-4 w-4" />
-                        <span>Generiere optimierte Texte</span>
+                        <span>Generating optimized texts</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <CpuChipIcon className="h-4 w-4 animate-spin" />
-                        <span>Erstelle visuelle Konzepte</span>
+                        <span>Creating visual concepts</span>
                       </div>
                     </div>
                   </div>
@@ -471,14 +471,14 @@ export default function AIMarketingHub() {
                         <CheckCircleIcon className="h-8 w-8 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-light text-gray-900">Generierter Content</h3>
-                        <p className="text-gray-600">Bereit zum Veröffentlichen oder Anpassen</p>
+                        <h3 className="text-2xl font-light text-gray-900">Generated Content</h3>
+                        <p className="text-gray-600">Ready to publish or customize</p>
                       </div>
                     </div>
                     <div className="flex space-x-3">
                       <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all">
                         <EyeIcon className="h-4 w-4" />
-                        <span>Vorschau</span>
+                        <span>Preview</span>
                       </button>
                       <button className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
                         <ArrowDownTrayIcon className="h-4 w-4" />
@@ -486,14 +486,14 @@ export default function AIMarketingHub() {
                       </button>
                       <button className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all">
                         <ShareIcon className="h-4 w-4" />
-                        <span>Veröffentlichen</span>
+                        <span>Publish</span>
                       </button>
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-4">📝 Generierter Text</h4>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4">📝 Generated Text</h4>
                       <div className="bg-gray-50 rounded-xl p-6">
                         <p className="text-gray-800 leading-relaxed mb-4">
                           {generatedContent[selectedTemplate]?.caption || generatedContent[selectedTemplate]?.content}
@@ -509,7 +509,7 @@ export default function AIMarketingHub() {
                     </div>
 
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-4">🎨 Visuelle Konzepte</h4>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4">🎨 Visual Concepts</h4>
                       <div className="bg-gray-50 rounded-xl p-6">
                         <p className="text-gray-700 text-sm mb-4">
                           {generatedContent[selectedTemplate]?.image_prompt}
