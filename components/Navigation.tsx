@@ -41,6 +41,16 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
+  // Auto-open business menu when on business pages
+  useEffect(() => {
+    const businessPaths = ['/dashboard', '/analytics', '/crm', '/smart-booking', '/marketing', '/reviews', '/admin', '/reports']
+    const isBusinessPage = businessPaths.includes(pathname)
+    
+    if (isBusinessPage && businessCollapsed) {
+      setBusinessCollapsed(false)
+    }
+  }, [pathname, businessCollapsed])
+
   // Direct layout adjustment for business menu state
   useEffect(() => {
     if (typeof window !== 'undefined') {
