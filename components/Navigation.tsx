@@ -41,6 +41,20 @@ export default function Navigation() {
   const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
+  // Adjust main content margin when business menu opens/closes (desktop only)
+  useEffect(() => {
+    const mainContent = document.getElementById('main-content')
+    if (mainContent && window.innerWidth >= 1024) { // Only on large screens
+      if (!businessCollapsed) {
+        mainContent.style.marginLeft = '288px'
+        mainContent.style.transition = 'margin-left 0.3s ease'
+      } else {
+        mainContent.style.marginLeft = '0px'
+        mainContent.style.transition = 'margin-left 0.3s ease'
+      }
+    }
+  }, [businessCollapsed])
+
   // Customer area (public)
   const customerItems = [
     { name: 'Home', href: '/', icon: HomeIcon },
@@ -182,8 +196,8 @@ export default function Navigation() {
 
       {/* Business Sidebar - Left - Collapsible */}
       {!businessCollapsed && (
-        <div className="fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:block overflow-y-auto">
-          <div className="p-4">
+        <div className="fixed top-16 left-0 bottom-0 w-72 bg-white border-r border-gray-200 shadow-lg z-40 hidden lg:flex flex-col">
+          <div className="p-4 flex-1 flex flex-col">
           
             {/* Header with Close Button */}
             <div className="flex items-center justify-between mb-4">
@@ -201,7 +215,7 @@ export default function Navigation() {
             </div>
 
             {/* Business Menu Items */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex-1 overflow-y-auto">
               {businessItems.map((item) => {
                 const isActive = pathname === item.href
                 return (
@@ -222,7 +236,7 @@ export default function Navigation() {
             </div>
 
             {/* Status Info */}
-            <div className="mt-auto pt-6 border-t border-gray-200">
+            <div className="pt-6 border-t border-gray-200">
               <div className="text-xs text-gray-500 text-center">
                 <div className="font-medium">Jenny's Xpandia Platform</div>
                 <div className="mt-1">Fully Implemented ✨</div>

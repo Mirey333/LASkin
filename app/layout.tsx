@@ -33,8 +33,8 @@ export default function RootLayout({
           {/* Navigation */}
           <Navigation />
           
-          {/* Main Content */}
-          <div className="relative z-10 pt-16">
+          {/* Main Content - conditional margin based on business menu */}
+          <div className="relative z-10 pt-16" id="main-content">
             {children}
           </div>
           
