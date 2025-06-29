@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Navigation from '../../components/Navigation'
 import { 
   UserIcon,
@@ -24,13 +24,16 @@ import {
   ExclamationTriangleIcon,
   ArrowRightIcon,
   PlayIcon,
-  BookmarkIcon
+  BookmarkIcon,
+  BoltIcon,
+  FireIcon,
+  MapPinIcon,
+  UserGroupIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/react/24/outline'
 
 export default function CustomerPortal() {
-  const [activeTab, setActiveTab] = useState('overview')
-  const [selectedTreatment, setSelectedTreatment] = useState(null)
-
   // VIP Features
   const vipFeatures = [
     {
@@ -206,7 +209,7 @@ export default function CustomerPortal() {
                   </div>
                 </div>
                 <div className="text-right">
-                                      <div className="text-2xl font-light mb-1">{customerProfile.points} Points</div>
+                  <div className="text-2xl font-light mb-1">{customerProfile.points} Points</div>
                   <div className="text-purple-100 text-sm">
                     {customerProfile.nextReward - customerProfile.points} to next reward
                   </div>
@@ -220,377 +223,711 @@ export default function CustomerPortal() {
               </div>
             </div>
             
-            {/* Quick Stats */}
-            <div className="grid md:grid-cols-4 gap-6 p-6">
-              <div className="text-center">
-                <CurrencyDollarIcon className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <div className="text-2xl font-light text-gray-900">${customerProfile.totalSpent.toLocaleString()}</div>
-                <div className="text-sm text-gray-600">Total Spent</div>
-              </div>
-              <div className="text-center">
-                <CalendarIcon className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-2xl font-light text-gray-900">{customerProfile.visits}</div>
-                <div className="text-sm text-gray-600">Treatments</div>
-              </div>
-              <div className="text-center">
-                <StarIcon className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
-                <div className="text-2xl font-light text-gray-900">{customerProfile.satisfaction}</div>
-                <div className="text-sm text-gray-600">Satisfaction</div>
-              </div>
-              <div className="text-center">
-                <GiftIcon className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                <div className="text-2xl font-light text-gray-900">3</div>
-                <div className="text-sm text-gray-600">Available Rewards</div>
-              </div>
-            </div>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-white rounded-xl p-2 shadow-lg border">
-              <button
-                onClick={() => setActiveTab('overview')}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'overview'
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                <UserIcon className="h-5 w-5" />
-                <span>Overview</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('appointments')}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'appointments'
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                <CalendarIcon className="h-5 w-5" />
-                <span>Appointments</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('history')}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'history'
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                <DocumentTextIcon className="h-5 w-5" />
-                <span>History</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('vip')}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'vip'
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                <TrophyIcon className="h-5 w-5" />
-                <span>VIP Benefits</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Overview Tab */}
-          {activeTab === 'overview' && (
-            <div className="space-y-8">
-              
-              {/* Personalized Recommendations */}
-              <div className="bg-white rounded-xl shadow-lg border">
-                <div className="p-6 border-b border-gray-200">
-                  <div className="flex items-center">
-                    <SparklesIcon className="h-6 w-6 text-purple-600 mr-3" />
-                    <h3 className="text-xl font-semibold text-gray-900">Persönliche Empfehlungen</h3>
+          {/* All Content in One Page */}
+          <div className="space-y-12">
+            
+            {/* Diamond Elite Status */}
+            <div className="relative bg-gradient-to-br from-yellow-400 via-yellow-300 to-amber-400 rounded-xl p-4 text-gray-800 overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/20"></div>
+              <div className="absolute top-2 right-2 opacity-20">
+                <div className="text-3xl">💎</div>
+              </div>
+              <div className="relative">
+                <div className="mb-4">
+                  <div>
+                    <h2 className="text-xl font-bold mb-1">Diamond Elite Status</h2>
+                    <p className="text-yellow-800 text-sm">Your exclusive membership at LA Skin</p>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {recommendations.map((rec) => (
-                      <div key={rec.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <h4 className="text-lg font-semibold text-gray-900 mb-2">{rec.title}</h4>
-                            <p className="text-gray-600 mb-3">{rec.description}</p>
-                            <div className="flex items-center space-x-2 mb-3">
-                              <span className="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">
-                                {rec.confidence}% Match
-                              </span>
-                              <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
-                                {rec.discount}% Discount
-                              </span>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-lg font-semibold text-green-600">
-                              ${rec.price - (rec.price * rec.discount / 100)}
-                            </div>
-                            <div className="text-sm text-gray-500 line-through">${rec.price}</div>
-                          </div>
+                
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold">12,840</div>
+                    <div className="text-xs font-medium text-yellow-800">Loyalty Points</div>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold">Platinum</div>
+                    <div className="text-xs font-medium text-yellow-800">Tier Level</div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center">
+                  <button className="bg-white text-yellow-700 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-50 transition-colors shadow-md text-sm">
+                    <div className="flex items-center space-x-2">
+                      <GiftIcon className="h-4 w-4" />
+                      <span>Available Rewards</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Exclusive Vouchers */}
+            <div className="bg-white rounded-xl shadow-lg border">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <GiftIcon className="h-6 w-6 text-purple-600 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-900">Exclusive Vouchers</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  {/* Premium Lifting Voucher */}
+                  <div className="relative bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg p-6 text-white overflow-hidden">
+                    <div className="absolute inset-0 bg-black/10"></div>
+                    <div className="relative">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="text-lg font-bold mb-1">Premium Lifting</h4>
+                          <p className="text-purple-100 text-sm">Exclusive for VIP Members</p>
                         </div>
-                        
-                        <div className="mb-4">
-                          <h5 className="font-medium text-gray-900 mb-2">Expected Results:</h5>
-                          <p className="text-sm text-gray-600">{rec.estimatedResults}</p>
+                        <div className="bg-white/20 px-3 py-1 rounded-full">
+                          <span className="text-xs font-bold">VIP20</span>
                         </div>
-                        
-                        <button className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <div className="text-2xl font-bold mb-1">20% Off</div>
+                          <div className="text-purple-100 text-xs">Save: $480</div>
+                        </div>
+                        <button className="bg-white text-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-50 transition-colors">
+                          Redeem
+                        </button>
+                      </div>
+                    </div>
+                    <div className="absolute top-2 right-2 opacity-30">
+                      <SparklesIcon className="h-8 w-8" />
+                    </div>
+                  </div>
+
+                  {/* Birthday Special */}
+                  <div className="relative bg-gradient-to-r from-pink-400 to-rose-400 rounded-lg p-6 text-white overflow-hidden">
+                    <div className="absolute inset-0 bg-black/10"></div>
+                    <div className="relative">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="text-lg font-bold mb-1">Birthday Special</h4>
+                          <p className="text-pink-100 text-sm">Free consultation + Gift</p>
+                        </div>
+                        <div className="bg-white/20 px-3 py-1 rounded-full">
+                          <span className="text-xs font-bold">BIRTHDAY</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <div className="text-2xl font-bold mb-1">Free</div>
+                          <div className="text-pink-100 text-xs">Valid until Jan 15, 2025</div>
+                        </div>
+                        <button className="bg-white text-pink-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-pink-50 transition-colors">
                           Book Now
                         </button>
                       </div>
-                    ))}
+                    </div>
+                    <div className="absolute top-2 right-2 opacity-30">
+                      <HeartIcon className="h-8 w-8" />
+                    </div>
+                  </div>
+
+                  {/* Friends Bonus */}
+                  <div className="relative bg-gradient-to-r from-emerald-400 to-teal-400 rounded-lg p-6 text-white overflow-hidden">
+                    <div className="absolute inset-0 bg-black/10"></div>
+                    <div className="relative">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="text-lg font-bold mb-1">Friends Bonus</h4>
+                          <p className="text-emerald-100 text-sm">Both get 15% discount</p>
+                        </div>
+                        <div className="bg-white/20 px-3 py-1 rounded-full">
+                          <span className="text-xs font-bold">FRIEND15</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <div className="text-2xl font-bold mb-1">15% for both</div>
+                          <div className="text-emerald-100 text-xs">Unlimited shares</div>
+                        </div>
+                        <button className="bg-white text-emerald-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-50 transition-colors">
+                          Share
+                        </button>
+                      </div>
+                    </div>
+                    <div className="absolute top-2 right-2 opacity-30">
+                      <UserGroupIcon className="h-8 w-8" />
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Quick Actions */}
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
-                  <CalendarIcon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Book Appointment</h3>
-                  <p className="text-gray-600 mb-4">Schedule new treatment</p>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Book
-                  </button>
-                </div>
-                
-                <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
-                  <ChatBubbleLeftRightIcon className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Request Consultation</h3>
-                  <p className="text-gray-600 mb-4">Free expert consultation</p>
-                  <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                    Contact
-                  </button>
-                </div>
-                
-                <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
-                  <GiftIcon className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Rewards</h3>
-                  <p className="text-gray-600 mb-4">Redeem points</p>
-                  <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-                    Redeem
-                  </button>
+            </div>
+            
+            {/* Personalized Recommendations */}
+            <div className="bg-white rounded-xl shadow-lg border">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <SparklesIcon className="h-6 w-6 text-purple-600 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-900">Personal Recommendations</h3>
                 </div>
               </div>
-            </div>
-          )}
-
-          {/* Appointments Tab */}
-          {activeTab === 'appointments' && (
-            <div className="space-y-8">
-              
-              {/* Upcoming Appointments */}
-              <div className="bg-white rounded-xl shadow-lg border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900">Upcoming Appointments</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    {upcomingAppointments.map((appointment) => (
-                      <div key={appointment.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
-                            <div className="text-center">
-                              <div className="text-lg font-semibold text-gray-900">{appointment.date}</div>
-                              <div className="text-sm text-gray-600">{appointment.time}</div>
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-gray-900">{appointment.service}</h4>
-                              <div className="text-sm text-gray-600">
-                                {appointment.practitioner} • {appointment.duration} Min
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-lg font-semibold text-green-600">${appointment.price}</div>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              appointment.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                            }`}>
-                              {appointment.status === 'confirmed' ? 'Confirmed' : 'Pending'}
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {recommendations.map((rec) => (
+                    <div key={rec.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2">{rec.title}</h4>
+                          <p className="text-gray-600 mb-3">{rec.description}</p>
+                          <div className="flex items-center space-x-2 mb-3">
+                            <span className="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                              {rec.confidence}% Match
+                            </span>
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+                              {rec.discount}% Discount
                             </span>
                           </div>
                         </div>
-                        
-                        <div className="flex space-x-2 mt-4">
-                          <button className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-lg hover:bg-blue-200">
-                            Modify
-                          </button>
-                          <button className="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-lg hover:bg-red-200">
-                            Cancel
-                          </button>
-                          <button className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200">
-                            Details
-                          </button>
+                        <div className="text-right">
+                          <div className="text-lg font-semibold text-green-600">
+                            ${rec.price - (rec.price * rec.discount / 100)}
+                          </div>
+                          <div className="text-sm text-gray-500 line-through">${rec.price}</div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Treatment History */}
-          {activeTab === 'history' && (
-            <div className="space-y-8">
-              
-              <div className="bg-white rounded-xl shadow-lg border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900">Behandlungsverlauf</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-6">
-                    {treatmentHistory.map((treatment) => (
-                      <div key={treatment.id} className="border border-gray-200 rounded-lg p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <h4 className="text-lg font-semibold text-gray-900 mb-1">{treatment.service}</h4>
-                            <div className="text-sm text-gray-600 space-y-1">
-                              <div>Datum: {treatment.date}</div>
-                              <div>Behandler: {treatment.practitioner}</div>
-                              <div>Ergebnis: {treatment.result}</div>
-                            </div>
-                          </div>
-                          <div className="flex items-center">
-                            {[...Array(treatment.satisfaction)].map((_, i) => (
-                              <StarIcon key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div className="grid md:grid-cols-2 gap-6 mb-4">
-                          <div>
-                            <h5 className="font-medium text-gray-900 mb-2">Before</h5>
-                            <img 
-                              src={treatment.beforePhoto} 
-                              alt="Before"
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
-                          </div>
-                          <div>
-                            <h5 className="font-medium text-gray-900 mb-2">After</h5>
-                            <img 
-                              src={treatment.afterPhoto} 
-                              alt="After"
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="bg-gray-50 rounded-lg p-4">
-                          <h5 className="font-medium text-gray-900 mb-2">Your Notes:</h5>
-                          <p className="text-gray-600">{treatment.notes}</p>
-                        </div>
+                      
+                      <div className="mb-4">
+                        <h5 className="font-medium text-gray-900 mb-2">Expected Results:</h5>
+                        <p className="text-sm text-gray-600">{rec.estimatedResults}</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* VIP Benefits */}
-          {activeTab === 'vip' && (
-            <div className="space-y-8">
-              
-              <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl p-8 text-white">
-                <div className="text-center">
-                  <TrophyIcon className="h-16 w-16 mx-auto mb-4 text-yellow-300" />
-                  <h2 className="text-3xl font-light mb-2">Platinum VIP Status</h2>
-                  <p className="text-purple-100 text-lg">Exclusive benefits for our most valued customers</p>
-                </div>
-              </div>
-
-              {/* VIP Features */}
-              <div className="bg-white rounded-xl shadow-lg border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900">🌟 Exklusive VIP Features</h3>
-                  <p className="text-gray-600 mt-2">Premium tools for our VIP customers</p>
-                </div>
-                <div className="p-6">
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {vipFeatures.map((feature) => (
-                      <div key={feature.id} className="relative group">
-                        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-300 transition-all hover:shadow-lg cursor-pointer">
-                          {feature.popular && (
-                            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                              POPULAR
-                            </div>
-                          )}
-                          
-                          <div className="text-center mb-4">
-                            <feature.icon className="h-12 w-12 text-purple-600 mx-auto mb-3" />
-                            <h4 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h4>
-                            <p className="text-sm text-gray-600">{feature.description}</p>
-                          </div>
-                          
-                          <div className="text-center">
-                            <a 
-                              href={feature.href}
-                              className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all group-hover:scale-105"
-                            >
-                              <span>Use Now</span>
-                              <ArrowRightIcon className="h-4 w-4 ml-2" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {vipBenefits.map((benefit, index) => (
-                  <div key={index} className="bg-white rounded-xl p-6 shadow-lg border">
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-lg font-semibold text-gray-900">{benefit.name}</h4>
-                      <CheckCircleIcon className="h-6 w-6 text-green-600" />
+                      
+                      <button className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Book Now
+                      </button>
                     </div>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-white rounded-xl shadow-lg border">
-                <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900">Exclusive Offers</h3>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-4">
-                      <div className="flex items-center justify-between">
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
+                <CalendarIcon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Book Appointment</h3>
+                <p className="text-gray-600 mb-4">Schedule new treatment</p>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                  Book
+                </button>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
+                <ChatBubbleLeftRightIcon className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Request Consultation</h3>
+                <p className="text-gray-600 mb-4">Free expert consultation</p>
+                <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                  Contact
+                </button>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border text-center hover:shadow-xl transition-all cursor-pointer">
+                <GiftIcon className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Rewards</h3>
+                <p className="text-gray-600 mb-4">Redeem points</p>
+                <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                  Redeem
+                </button>
+              </div>
+            </div>
+
+            {/* Before-After Gallery */}
+            <div className="bg-white rounded-xl shadow-lg border">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <PhotoIcon className="h-6 w-6 text-indigo-600 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-900">Before-After Gallery</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-8">
+                  
+                  {/* Botox Treatment */}
+                  <div className="relative group">
+                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200">
+                      <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h4 className="font-semibold text-gray-900">VIP Weekend Special</h4>
-                          <p className="text-gray-600">20% discount on all premium treatments</p>
-                          <span className="text-sm text-purple-600">Valid until January 31st</span>
+                          <h4 className="text-lg font-semibold text-gray-900">Botox Treatment</h4>
+                          <p className="text-sm text-gray-600">October 15, 2024</p>
                         </div>
-                        <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-                          Use
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              Before
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/f3f4f6/9ca3af?text=Before" 
+                              alt="Before Botox" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-purple-300 transition-colors"
+                            />
+                          </div>
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              After
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/ecfdf5/10b981?text=After" 
+                              alt="After Botox" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-green-300 transition-colors"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 border border-gray-200 mb-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-gray-700">Result</span>
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Excellent</span>
+                          </div>
+                          <p className="text-sm text-gray-600 italic">"Fantastic results! The wrinkles are significantly reduced and the face looks fresher."</p>
+                        </div>
+                        
+                        {/* Share Button */}
+                        <button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                          <UserGroupIcon className="h-4 w-4" />
+                          <span>Share with Community & Earn 50 Points</span>
+                          <StarIcon className="h-4 w-4 text-yellow-300" />
                         </button>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Facial Treatment */}
+                  <div className="relative group">
+                    <div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl p-6 border border-pink-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900">Deep Cleansing Facial</h4>
+                          <p className="text-sm text-gray-600">September 28, 2024</p>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              Vorher
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/f3f4f6/9ca3af?text=Before" 
+                              alt="Before Facial" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-pink-300 transition-colors"
+                            />
+                          </div>
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              Nachher
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/fdf2f8/ec4899?text=After" 
+                              alt="After Facial" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-green-300 transition-colors"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 border border-gray-200">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-gray-700">Ergebnis</span>
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Perfekt</span>
+                          </div>
+                          <p className="text-sm text-gray-600 italic">"Meine Haut strahlt! Alle Unreinheiten sind verschwunden und sie fühlt sich so weich an."</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Lip Enhancement */}
+                  <div className="relative group">
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900">Lip Enhancement</h4>
+                          <p className="text-sm text-gray-600">August 12, 2024</p>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          {[...Array(4)].map((_, i) => (
+                            <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                          <StarIcon className="h-4 w-4 text-gray-300" />
+                        </div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              Before
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/f3f4f6/9ca3af?text=Before" 
+                              alt="Before Lips" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-amber-300 transition-colors"
+                            />
+                          </div>
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              After
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/fff7ed/f97316?text=After" 
+                              alt="After Lips" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-green-300 transition-colors"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 border border-gray-200 mb-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-gray-700">Result</span>
+                            <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Very Good</span>
+                          </div>
+                          <p className="text-sm text-gray-600 italic">"Naturally fuller looking lips! Exactly the result I was hoping for."</p>
+                        </div>
+                        
+                        {/* Share Button */}
+                        <button className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-amber-700 hover:to-orange-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                          <UserGroupIcon className="h-4 w-4" />
+                          <span>Share with Community & Earn 50 Points</span>
+                          <StarIcon className="h-4 w-4 text-yellow-300" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skin Rejuvenation */}
+                  <div className="relative group">
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6 border border-emerald-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900">Skin Rejuvenation</h4>
+                          <p className="text-sm text-gray-600">July 5, 2024</p>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              Before
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/f3f4f6/9ca3af?text=Before" 
+                              alt="Before Rejuvenation" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-emerald-300 transition-colors"
+                            />
+                          </div>
+                          <div className="relative group">
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
+                              After
+                            </div>
+                            <img 
+                              src="https://via.placeholder.com/200x150/ecfdf5/10b981?text=After" 
+                              alt="After Rejuvenation" 
+                              className="w-full h-32 object-cover rounded-lg border-2 border-gray-200 group-hover:border-green-300 transition-colors"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 border border-gray-200 mb-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-gray-700">Result</span>
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Excellent</span>
+                          </div>
+                          <p className="text-sm text-gray-600 italic">"My skin looks years younger! The treatment was a complete success."</p>
+                        </div>
+                        
+                        {/* Share Button */}
+                        <button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                          <UserGroupIcon className="h-4 w-4" />
+                          <span>Share with Community & Earn 50 Points</span>
+                          <StarIcon className="h-4 w-4 text-yellow-300" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                    View All Treatments
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Upcoming Appointments */}
+            <div className="bg-white rounded-xl shadow-lg border">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <CalendarIcon className="h-6 w-6 text-blue-600 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-900">Upcoming Appointments</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  {upcomingAppointments.map((appointment) => (
+                    <div key={appointment.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="text-center">
+                            <div className="text-lg font-semibold text-gray-900">{appointment.date}</div>
+                            <div className="text-sm text-gray-600">{appointment.time}</div>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-gray-900">{appointment.service}</h4>
+                            <div className="text-sm text-gray-600">
+                              {appointment.practitioner} • {appointment.duration} Min
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-lg font-semibold text-green-600">${appointment.price}</div>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            appointment.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {appointment.status === 'confirmed' ? 'Confirmed' : 'Pending'}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex space-x-2 mt-4">
+                        <button className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-lg hover:bg-blue-200">
+                          Modify
+                        </button>
+                        <button className="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-lg hover:bg-red-200">
+                          Cancel
+                        </button>
+                        <button className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Treatment History */}            
+            <div className="bg-white rounded-xl shadow-lg border">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <DocumentTextIcon className="h-6 w-6 text-green-600 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-900">Treatment History</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="space-y-6">
+                  {treatmentHistory.map((treatment) => (
+                    <div key={treatment.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-1">{treatment.service}</h4>
+                          <div className="text-sm text-gray-600 mb-2">
+                            {treatment.date} • {treatment.practitioner}
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+                              {treatment.result}
+                            </span>
+                            <div className="flex items-center">
+                              {[...Array(treatment.satisfaction)].map((_, i) => (
+                                <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                          <h5 className="font-medium text-gray-900 mb-2">Before</h5>
+                          <img 
+                            src={treatment.beforePhoto} 
+                            alt="Before" 
+                            className="w-full h-32 object-cover rounded-lg border"
+                          />
+                        </div>
+                        <div>
+                          <h5 className="font-medium text-gray-900 mb-2">After</h5>
+                          <img 
+                            src={treatment.afterPhoto} 
+                            alt="After" 
+                            className="w-full h-32 object-cover rounded-lg border"
+                          />
+                        </div>
+                      </div>
+                      
+                      {treatment.notes && (
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <p className="text-sm text-gray-700 italic">"{treatment.notes}"</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* VIP Lounge */}
+            <div className="space-y-8">
+              {/* Rewards & Challenges */}
+              <div className="bg-white rounded-xl shadow-lg border">
+                <div className="p-6 border-b border-gray-200">
+                  <div className="flex items-center">
+                    <TrophyIcon className="h-6 w-6 text-yellow-500 mr-3" />
+                    <h3 className="text-xl font-semibold text-gray-900">Rewards & Challenges</h3>
+                  </div>
+                </div>
+                <div className="p-6 space-y-6">
+                  
+                  {/* Monthly Challenge */}
+                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border border-indigo-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="bg-indigo-100 p-2 rounded-full mr-3">
+                          <BoltIcon className="h-5 w-5 text-indigo-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">December Challenge</h4>
+                          <p className="text-sm text-gray-600">3 treatments by year-end</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-lg font-bold text-indigo-600">2/3</div>
+                        <div className="text-xs text-gray-500">Treatments</div>
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <div className="w-full bg-indigo-200 rounded-full h-2">
+                        <div className="bg-indigo-600 h-2 rounded-full" style={{width: '66.7%'}}></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Reward: 500 Bonus Points</span>
+                      <span className="text-sm font-semibold text-indigo-600">13 Days Remaining</span>
+                    </div>
+                  </div>
+
+                  {/* Streak Counter */}
+                  <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 border border-orange-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="bg-orange-100 p-2 rounded-full mr-3">
+                          <FireIcon className="h-5 w-5 text-orange-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">Treatment Streak</h4>
+                          <p className="text-sm text-gray-600">Regular Appointments</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-lg font-bold text-orange-600">8 Months</div>
+                        <div className="text-xs text-gray-500">Current Streak</div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Next reward at 12 months</span>
+                      <span className="text-sm font-semibold text-orange-600">🔥 Hot Streak!</span>
+                    </div>
+                  </div>
+
+                  {/* Achievement Badges */}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3">Achievements</h4>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-center">
+                        <div className="text-2xl mb-1">🥇</div>
+                        <div className="text-xs font-medium text-yellow-800">VIP Member</div>
+                      </div>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
+                        <div className="text-2xl mb-1">💎</div>
+                        <div className="text-xs font-medium text-purple-800">High Roller</div>
+                      </div>
+                      <div className="bg-pink-50 border border-pink-200 rounded-lg p-3 text-center">
+                        <div className="text-2xl mb-1">👑</div>
+                        <div className="text-xs font-medium text-pink-800">Loyal Queen</div>
+                      </div>
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+                        <div className="text-2xl mb-1">🌟</div>
+                        <div className="text-xs font-medium text-green-800">Review Star</div>
+                      </div>
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+                        <div className="text-2xl mb-1">🚀</div>
+                        <div className="text-xs font-medium text-blue-800">Early Adopter</div>
+                      </div>
+                      <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 text-center opacity-50">
+                        <div className="text-2xl mb-1">🎯</div>
+                        <div className="text-xs font-medium text-gray-500">Perfectionist</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Exclusive Benefits */}
+              <div className="bg-white rounded-xl shadow-lg border">
+                <div className="p-6 border-b border-gray-200">
+                  <div className="flex items-center">
+                    <StarIcon className="h-6 w-6 text-yellow-500 mr-3" />
+                    <h3 className="text-xl font-semibold text-gray-900">Exclusive VIP Benefits</h3>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <div className="text-center">
+                      <div className="bg-gradient-to-br from-yellow-400 to-orange-400 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <CalendarIcon className="h-8 w-8 text-white" />
+                      </div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Priority Booking</h4>
+                      <p className="text-sm text-gray-600">Priority appointment scheduling and last-minute bookings at no extra charge</p>
                     </div>
                     
-                    <div className="bg-gradient-to-r from-gold-50 to-yellow-50 border border-yellow-200 rounded-lg p-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-semibold text-gray-900">Complimentary Consultation</h4>
-                          <p className="text-gray-600">Free consultation for new treatments</p>
-                          <span className="text-sm text-yellow-600">Always available</span>
-                        </div>
-                        <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700">
-                          Book
-                        </button>
+                    <div className="text-center">
+                      <div className="bg-gradient-to-br from-purple-400 to-pink-400 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <GiftIcon className="h-8 w-8 text-white" />
                       </div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Exclusive Offers</h4>
+                      <p className="text-sm text-gray-600">Early access to new treatments and seasonal offers</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="bg-gradient-to-br from-emerald-400 to-teal-400 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <SparklesIcon className="h-8 w-8 text-white" />
+                      </div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Complimentary Services</h4>
+                      <p className="text-sm text-gray-600">Complimentary follow-up treatments and premium skincare products</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

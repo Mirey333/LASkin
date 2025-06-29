@@ -25,8 +25,7 @@ import {
     ChevronLeftIcon,
     ChatBubbleLeftRightIcon,
     MapPinIcon,
-    PhoneIcon,
-    PaperAirplaneIcon
+    PhoneIcon
   } from '@heroicons/react/24/outline'
 import { 
   FaFacebook, 
@@ -34,11 +33,11 @@ import {
   FaTwitter, 
   FaYoutube 
 } from 'react-icons/fa'
+import ChatWidget from './ChatWidget'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [businessCollapsed, setBusinessCollapsed] = useState(true)
-  const [showChatWidget, setShowChatWidget] = useState(false)
   const pathname = usePathname()
 
   // Auto-open business menu when on business pages
@@ -49,7 +48,7 @@ export default function Navigation() {
     if (isBusinessPage && businessCollapsed) {
       setBusinessCollapsed(false)
     }
-  }, [pathname, businessCollapsed])
+  }, [pathname])
 
   // Direct layout adjustment for business menu state
   useEffect(() => {
@@ -150,17 +149,8 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Right Side - Chat, Store Locator, Social Links */}
+          {/* Right Side - Store Locator, Social Links */}
           <div className="hidden lg:flex items-center space-x-4">
-            {/* Chat Button */}
-            <button
-              onClick={() => setShowChatWidget(true)}
-              className="flex items-center space-x-2 px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all text-sm font-medium"
-            >
-              <ChatBubbleLeftRightIcon className="h-4 w-4" />
-              <span>Live Chat</span>
-            </button>
-
             {/* Store Locator */}
             <Link 
               href="/store-locator"
@@ -399,60 +389,7 @@ export default function Navigation() {
       )}
       
       {/* Chat Widget */}
-      {showChatWidget && (
-        <div className="fixed bottom-4 right-4 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 h-96">
-            {/* Chat Header */}
-            <div className="bg-purple-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
-              <div>
-                <h3 className="font-semibold">LA Skin Support</h3>
-                <p className="text-purple-100 text-sm">We're here to help you</p>
-              </div>
-                            <button 
-                onClick={() => setShowChatWidget(false)}
-                className="text-purple-200 hover:text-white"
-              >
-                <XMarkIcon className="h-5 w-5" />
-              </button>
-            </div>
-            
-            {/* Chat Messages */}
-            <div className="p-4 h-64 overflow-y-auto">
-              <div className="space-y-3">
-                <div className="flex">
-                  <div className="bg-gray-100 rounded-lg p-3 max-w-xs">
-                    <p className="text-sm">👋 Welcome to LA Skin! How can we help you today?</p>
-                    <span className="text-xs text-gray-500">Support Agent • gerade eben</span>
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="bg-gray-100 rounded-lg p-3 max-w-xs">
-                    <p className="text-sm">• Product recommendations<br/>
-                    • Booking assistance<br/>
-                    • Treatment questions<br/>
-                    • General inquiries</p>
-                    <span className="text-xs text-gray-500">Support Agent • gerade eben</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Chat Input */}
-            <div className="p-4 border-t border-gray-200">
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  placeholder="Type your message..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
-                />
-                <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                  <PaperAirplaneIcon className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ChatWidget />
     </>
   )
 } 

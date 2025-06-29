@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { 
   ChatBubbleLeftRightIcon,
   XMarkIcon,
-  PaperAirplaneIcon,
+  ArrowUpIcon,
   UserIcon,
   StarIcon,
   PhoneIcon,
@@ -226,7 +226,7 @@ export default function ChatWidget() {
                 onClick={sendMessage}
                 className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors"
               >
-                <PaperAirplaneIcon className="h-4 w-4" />
+                <ArrowUpIcon className="h-4 w-4" />
               </button>
             </div>
           </div>
