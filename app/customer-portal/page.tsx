@@ -525,7 +525,7 @@ export default function CustomerPortal() {
                         <div className="grid grid-cols-2 gap-4 mb-4">
                           <div className="relative group">
                             <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
-                              Vorher
+                              Before
                             </div>
                             <img 
                               src="https://via.placeholder.com/200x150/f3f4f6/9ca3af?text=Before" 
@@ -535,7 +535,7 @@ export default function CustomerPortal() {
                           </div>
                           <div className="relative group">
                             <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
-                              Nachher
+                              After
                             </div>
                             <img 
                               src="https://via.placeholder.com/200x150/fdf2f8/ec4899?text=After" 
@@ -547,10 +547,10 @@ export default function CustomerPortal() {
                         
                         <div className="bg-white rounded-lg p-4 border border-gray-200">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium text-gray-700">Ergebnis</span>
-                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Perfekt</span>
+                            <span className="text-sm font-medium text-gray-700">Result</span>
+                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Perfect</span>
                           </div>
-                          <p className="text-sm text-gray-600 italic">"Meine Haut strahlt! Alle Unreinheiten sind verschwunden und sie fühlt sich so weich an."</p>
+                          <p className="text-sm text-gray-600 italic">"My skin glows! All impurities are gone and it feels so soft."</p>
                         </div>
                       </div>
                     </div>
@@ -702,7 +702,7 @@ export default function CustomerPortal() {
                           <div>
                             <h4 className="font-semibold text-gray-900">{appointment.service}</h4>
                             <div className="text-sm text-gray-600">
-                              {appointment.practitioner} • {appointment.duration} Min
+                              {appointment.practitioner} • {appointment.duration} min
                             </div>
                           </div>
                         </div>
